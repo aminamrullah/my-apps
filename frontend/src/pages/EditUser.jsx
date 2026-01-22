@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+import { API_BASE } from "../lib/api";
 
 const EditUser = () => {
   const { id } = useParams();
@@ -15,9 +16,7 @@ const EditUser = () => {
 
   const fetchUser = async (token) => {
     try {
-      const response = await axios.get(
-        `http://localhost:3000/api/users/${id}`,
-        {
+      const response = await axios.get(`${API_BASE}/users/${id}`, {
           headers: { Authorization: `Bearer ${token}` },
         },
       );
@@ -65,7 +64,7 @@ const EditUser = () => {
       payload.password = newPassword;
     }
     try {
-      await axios.put(`http://localhost:3000/api/users/${id}`, payload, {
+      await axios.put(`${API_BASE}/users/${id}`, payload, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,

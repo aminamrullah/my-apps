@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import { API_BASE } from "../lib/api";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -10,13 +11,12 @@ const Login = () => {
     e.preventDefault();
     try {
       // 1. Kirim email & password ke Backend
-      const response = await axios.post("http://localhost:3000/api/login", {
+      const response = await axios.post(`${API_BASE}/auth/login`, {
         email: email,
         password: password,
       });
       // 2. Ambil token dari respon backend
-      // (Sesuaikan dengan nama key di backend Anda, misal 'accessToken')
-      const token = response.data.accessToken;
+      const token = response.data.token;
       // 3. Simpan token ke LocalStorage Browser
       localStorage.setItem("token", token);
       // 4. Redirect ke Dashboard
@@ -24,7 +24,7 @@ const Login = () => {
     } catch (error) {
       // Jika password salah / user tidak ada
       if (error.response) {
-        setMsg(error.response.data.msg);
+        setMsg(error.response.data?.message || "Gagal login, coba lagi");
       }
     }
   };

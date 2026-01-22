@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { API_BASE } from "../lib/api";
 
 const AddUser = () => {
   const [name, setName] = useState("");
@@ -25,7 +26,7 @@ const AddUser = () => {
     }
     try {
       await axios.post(
-        "http://localhost:3000/api/users",
+        `${API_BASE}/users`,
         { name, email, password, gender },
         {
           headers: {

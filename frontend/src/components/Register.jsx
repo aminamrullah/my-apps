@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import { API_BASE } from "../lib/api";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -21,7 +22,7 @@ const Register = () => {
     }
     setLoading(true);
     try {
-      await axios.post("http://localhost:3000/api/register", {
+      await axios.post(`${API_BASE}/auth/register`, {
         name,
         email,
         password,
@@ -30,9 +31,7 @@ const Register = () => {
       });
       navigate("/login");
     } catch (err) {
-      setError(
-        err.response?.data?.message || "Terjadi kesalahan saat mendaftar.",
-      );
+      setError(err.response?.data?.message || "Terjadi kesalahan saat mendaftar.");
     } finally {
       setLoading(false);
     }

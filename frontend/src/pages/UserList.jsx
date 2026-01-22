@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import { API_BASE } from "../lib/api";
 const UserList = () => {
   const [users, setUsers] = useState([]);
   const [token, setToken] = useState("");
@@ -23,7 +24,7 @@ const UserList = () => {
 
   const getUsers = async (tokenToUse) => {
     try {
-      const response = await axios.get("http://localhost:3000/api/users", {
+      const response = await axios.get(`${API_BASE}/users`, {
         headers: { Authorization: `Bearer ${tokenToUse}` },
       });
       setUsers(response.data?.data || []);
@@ -45,7 +46,7 @@ const UserList = () => {
       return;
     }
     try {
-      await axios.delete(`http://localhost:3000/api/users/${id}`, {
+      await axios.delete(`${API_BASE}/users/${id}`, {
         headers: { Authorization: `Bearer ${storedToken}` },
       });
       getUsers(storedToken);

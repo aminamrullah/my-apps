@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { API_BASE } from "../lib/api";
 // PENTING: Gunakan ini untuk redirect
 const Dashboard = () => {
   const [users, setUsers] = useState([]);
@@ -23,7 +24,7 @@ const Dashboard = () => {
 
   const getUsers = async (tokenToUse) => {
     try {
-      const response = await axios.get("http://localhost:3000/api/users", {
+      const response = await axios.get(`${API_BASE}/users`, {
         headers: { Authorization: `Bearer ${tokenToUse}` },
       });
       setUsers(response.data?.data || []);

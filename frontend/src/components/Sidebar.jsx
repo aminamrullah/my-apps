@@ -13,7 +13,7 @@ const Sidebar = () => {
             to="/dashboard"
             className="block p-3 rounded hover:bg-gray-700 transition"
           >
-            🏠 Dashboard
+            Dashboard
           </Link>
         </li>
         <li>
@@ -21,7 +21,7 @@ const Sidebar = () => {
             to="/users"
             className="block p-3 rounded hover:bg-gray-700 transition"
           >
-            👥 Manajemen User
+            Manajemen User
           </Link>
         </li>
         {/* <li>
@@ -38,4 +38,3 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
-
