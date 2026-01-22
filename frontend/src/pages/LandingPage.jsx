@@ -3,11 +3,12 @@ import { Link } from "react-router-dom";
 import Hero from "../components/Hero";
 import Features from "../components/Features";
 import Footer from "../components/Footer";
+import Navbar from "../components/Navbars";
 
 const LandingPage = () => {
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-blue-50 to-white">
-      <header className="sticky top-0 z-20 bg-white/95 backdrop-blur border-b border-gray-200">
+      {/* <header className="sticky top-0 z-20 bg-white/95 backdrop-blur border-b border-gray-200">
         <div className="container mx-auto px-4 py-4 flex flex-col sm:flex-row gap-3 sm:gap-0 items-center justify-between">
           <div className="text-2xl font-bold text-blue-600">WebService</div>
           <nav className="flex items-center gap-4 text-sm sm:text-base text-gray-600">
@@ -25,7 +26,8 @@ const LandingPage = () => {
             </Link>
           </nav>
         </div>
-      </header>
+      </header> */}
+      <Navbar />
       <main className="flex-1">
         <Hero />
         <Features />
