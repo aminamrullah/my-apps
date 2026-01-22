@@ -9,9 +9,10 @@ require("dotenv").config();
 
 const app = express();
 // app.use(cors());
+const allowedOrig = "https://my-apps-a8ro.vercel.app";
 app.use(
   cors({
-    origin: ["https://my-apps-a8ro.vercel.app/"], // Ganti dengan URL frontend Anda
+    origin: allowedOrig,
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   }),
