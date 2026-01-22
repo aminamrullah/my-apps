@@ -8,7 +8,7 @@ const Footer = () => {
         <h2 className="text-2xl font-bold mb-4">MyUmrah</h2>{" "}
         <p className="text-gray-400 mb-6">
           {" "}
-          (c) 2024 MyUmrah Inc. All rights reserved.{" "}
+          (c) 2026 MohAminAmrullah|MyUmrah Inc. All rights reserved.{" "}
         </p>{" "}
         <div className="flex justify-center gap-6">
           {" "}
