@@ -12,28 +12,30 @@ const Hero = () => {
         {/* Headline */}{" "}
         <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
           {" "}
-          Bangun Website Impian <br />{" "}
-          <span className="text-blue-600">Lebih Cepat & Elegan</span>{" "}
+          MyUmrah Indonesia <br />{" "}
+          <span className="text-blue-600">
+            Ibadah Tenang , Khusyu' & Nyaman
+          </span>{" "}
         </h1>{" "}
         {/* Subheadline */}{" "}
         <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
           {" "}
-          Framework terbaik untuk developer yang ingin fokus pada fungsionalitas
-          tanpa pusing memikirkan CSS dasar. Mulai sekarang juga.{" "}
+          Platform perjalanan umrah terbaik dengan tenang, khusyu', dan nyaman
+          bersama keluarga tercinta.{" "}
         </p>{" "}
         {/* CTA Buttons */}{" "}
         <div className="flex justify-center gap-4">
-          <Link
-            to="/register"
+          <a
+            href="#packages"
             className="bg-blue-600 text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-blue-700 transition shadow-lg hover:shadow-xl"
           >
-            Mulai Sekarang
-          </Link>
+            Lihat Paket
+          </a>
           <a
             href="#features"
             className="bg-white text-blue-600 px-8 py-3 rounded-lg text-lg font-semibold border border-blue-200 hover:bg-blue-50 transition"
           >
-            Pelajari Dulu
+            Kenalan Dulu
           </a>
         </div>
         {/* Image Placeholder */}{" "}

@@ -65,10 +65,10 @@ const UserList = () => {
         <h2 className="text-2xl font-bold text-gray-800">Daftar User</h2>{" "}
         <Link
           to="/users/add"
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+          className="bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition text-sm font-semibold"
         >
           {" "}
-          + Tambah Baru{" "}
+          Tambah Baru{" "}
         </Link>{" "}
       </div>{" "}
       <div className="bg-white rounded-lg shadow overflow-hidden">
@@ -144,4 +144,3 @@ const UserList = () => {
   );
 };
 export default UserList;
-

@@ -16,13 +16,21 @@ const systemHighlights = [
     title: "Paket Umrah Terstruktur",
     description:
       "Kelola paket berdasarkan durasi, harga, dan jadwal keberangkatan dengan mudah.",
-    points: ["Pengaturan kapasitas", "Detail fasilitas akomodasi", "Harga & keberangkatan"],
+    points: [
+      "Pengaturan kapasitas",
+      "Detail fasilitas akomodasi",
+      "Harga & keberangkatan",
+    ],
   },
   {
     title: "Booking & Keuangan",
     description:
       "Pantau paket terbooking, status pembayaran, dan seat assignment dari satu dashboard.",
-    points: ["Status booking real-time", "Pembayaran & deposit", "Nomor kursi & catatan"],
+    points: [
+      "Status booking real-time",
+      "Pembayaran & deposit",
+      "Nomor kursi & catatan",
+    ],
   },
   {
     title: "Tim Operasional",
@@ -66,14 +74,11 @@ const LandingPage = () => {
         <section id="cta" className="py-12 px-4">
           <div className="max-w-6xl mx-auto grid gap-6">
             <div className="rounded-3xl bg-white shadow-2xl p-8">
-              <h3 className="text-3xl font-semibold text-gray-900">
-                Sistem Informasi Jamaah Umrah
-              </h3>
+              <h3 className="text-3xl font-semibold text-gray-900">MyUmrah</h3>
               <p className="text-gray-600 mt-3">
-                Panel admin ini menggabungkan user management dengan domain khusus
-                umrah: jamaah, paket, pegawai operasional, dan booking. Anda dapat
-                melihat status jamaah, menugaskan staff seperti tour leader hingga
-                marketing, serta memantau paket dan booking dalam satu alur.
+                Sistem manajemen umrah terintegrasi untuk agen perjalanan yang
+                ingin mengelola data jamaah, paket umrah, booking, dan tim
+                operasional dalam satu platform mudah digunakan.
               </p>
             </div>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -85,7 +90,9 @@ const LandingPage = () => {
                   <h4 className="text-xl font-semibold text-gray-900">
                     {item.title}
                   </h4>
-                  <p className="text-gray-600 mt-2 flex-1">{item.description}</p>
+                  <p className="text-gray-600 mt-2 flex-1">
+                    {item.description}
+                  </p>
                   <ul className="mt-4 space-y-1 text-sm text-blue-600">
                     {item.points.map((point) => (
                       <li key={point} className="flex items-center gap-2">
@@ -99,7 +106,10 @@ const LandingPage = () => {
             </div>
           </div>
         </section>
-        <section className="py-12 px-4 bg-gradient-to-b from-white to-blue-50">
+        <section
+          id="packages"
+          className="py-12 px-4 bg-gradient-to-b from-white to-blue-50"
+        >
           <div className="max-w-6xl mx-auto space-y-6">
             <div>
               <p className="text-sm uppercase tracking-wide text-blue-600 font-semibold">
@@ -109,9 +119,10 @@ const LandingPage = () => {
                 Tawarkan pengalaman ibadah yang terencana
               </h3>
               <p className="text-gray-600 mt-2 max-w-3xl">
-                Setiap paket bisa dipublish langsung ke landing page sehingga jamaah
-                maupun marketing melihat detail durasi, fasilitas, dan harga
-                terbaru. Data paket juga otomatis terkait dengan booking jamaah.
+                Setiap paket bisa dipublish langsung ke landing page sehingga
+                jamaah maupun marketing melihat detail durasi, fasilitas, dan
+                harga terbaru. Data paket juga otomatis terkait dengan booking
+                jamaah.
               </p>
             </div>
             <div className="grid gap-6 md:grid-cols-3">
@@ -127,7 +138,9 @@ const LandingPage = () => {
                     {pkg.title}
                   </h4>
                   <p className="text-sm text-gray-500 mt-1">{pkg.duration}</p>
-                  <p className="text-3xl font-bold text-blue-600 mt-4">{pkg.price}</p>
+                  <p className="text-3xl font-bold text-blue-600 mt-4">
+                    {pkg.price}
+                  </p>
                   <p className="mt-4 text-gray-600 flex-1">{pkg.description}</p>
                   <button className="mt-6 rounded-full border border-blue-600 text-blue-600 font-semibold px-4 py-2 hover:bg-blue-50 transition">
                     Pelajari Paket
@@ -145,8 +158,8 @@ const LandingPage = () => {
             <p className="text-gray-600 mt-3">
               Mulai dari landing page hingga detail booking, panel admin yang
               sudah Anda kenal sekarang dapat skala untuk seluruh operasional
-              umrah; termasuk manajemen pegawai seperti tour leader, guide, admin,
-              marketing, dan staff lainnya.
+              umrah; termasuk manajemen pegawai seperti tour leader, guide,
+              admin, marketing, dan staff lainnya.
             </p>
             <div className="mt-6 flex flex-wrap justify-center gap-4">
               <Link
@@ -161,6 +174,31 @@ const LandingPage = () => {
               >
                 Daftar Pengguna Baru
               </Link>
+            </div>
+          </div>
+        </section>
+        <section id="contact" className="py-12 px-4 bg-white">
+          <div className="max-w-5xl mx-auto grid gap-6 md:grid-cols-3">
+            <div className="rounded-3xl bg-blue-50 p-6 shadow-lg">
+              <h4 className="text-lg font-semibold text-blue-600">Hubungi Kami</h4>
+              <p className="text-gray-600 mt-2 text-sm">
+                Konsultasi kebutuhan sistem umrah, request demo, atau dukungan teknis bisa
+                langsung menghubungi tim operasional.
+              </p>
+            </div>
+            <div className="rounded-3xl bg-white border border-blue-50 p-6 shadow-lg">
+              <p className="text-sm font-semibold text-gray-500">Email Support</p>
+              <p className="text-lg font-semibold text-gray-800 mt-1">
+                support@umrahinfo.id
+              </p>
+              <p className="text-sm text-gray-500 mt-2">
+                Balasan cepat di jam kerja 08.00 - 18.00 WIB.
+              </p>
+            </div>
+            <div className="rounded-3xl bg-white border border-blue-50 p-6 shadow-lg">
+              <p className="text-sm font-semibold text-gray-500">Telepon</p>
+              <p className="text-lg font-semibold text-gray-800 mt-1">+62 812 3456 7890</p>
+              <p className="text-sm text-gray-500 mt-2">Tersedia WA dan hotline operasional.</p>
             </div>
           </div>
         </section>

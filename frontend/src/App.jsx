@@ -17,9 +17,17 @@ import Register from "./components/Register";
 import Dashboard from "./components/Dashboard";
 import LandingPage from "./pages/LandingPage";
 import JamaahList from "./pages/JamaahList";
+import AddJamaah from "./pages/AddJamaah";
+import EditJamaah from "./pages/EditJamaah";
 import PackageList from "./pages/PackageList";
+import AddPackage from "./pages/AddPackage";
+import EditPackage from "./pages/EditPackage";
 import EmployeeList from "./pages/EmployeeList";
+import AddEmployee from "./pages/AddEmployee";
+import EditEmployee from "./pages/EditEmployee";
 import BookingList from "./pages/BookingList";
+import AddBooking from "./pages/AddBooking";
+import EditBooking from "./pages/EditBooking";
 
 const SidebarLayout = () => (
   <div className="flex min-h-screen bg-gray-100">
@@ -54,9 +62,17 @@ function App() {
           <Route path="/users/add" element={<AddUser />} />
           <Route path="/users/edit/:id" element={<EditUser />} />
           <Route path="/jamaahs" element={<JamaahList />} />
+          <Route path="/jamaahs/add" element={<AddJamaah />} />
+          <Route path="/jamaahs/edit/:id" element={<EditJamaah />} />
           <Route path="/packages" element={<PackageList />} />
+          <Route path="/packages/add" element={<AddPackage />} />
+          <Route path="/packages/edit/:id" element={<EditPackage />} />
           <Route path="/employees" element={<EmployeeList />} />
+          <Route path="/employees/add" element={<AddEmployee />} />
+          <Route path="/employees/edit/:id" element={<EditEmployee />} />
           <Route path="/bookings" element={<BookingList />} />
+          <Route path="/bookings/add" element={<AddBooking />} />
+          <Route path="/bookings/edit/:id" element={<EditBooking />} />
         </Route>
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
