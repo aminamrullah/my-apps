@@ -8,7 +8,14 @@ const { eq } = require("drizzle-orm");
 require("dotenv").config();
 
 const app = express();
-app.use(cors());
+// app.use(cors());
+app.use(
+  cors({
+    origin: ["https://my-apps-c9hu.vercel.app/"], // Ganti dengan URL frontend Anda
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  }),
+);
 app.use(express.json());
 
 // Middleware JWT
