@@ -5,6 +5,57 @@ import Features from "../components/Features";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 
+const systemHighlights = [
+  {
+    title: "Data Jamaah Lengkap",
+    description:
+      "Rekam data identitas, paspor, grup perjalanan, dan status visa dalam satu layar.",
+    points: ["Riwayat paket", "Status vaksinasi", "Catatan visa & paspor"],
+  },
+  {
+    title: "Paket Umrah Terstruktur",
+    description:
+      "Kelola paket berdasarkan durasi, harga, dan jadwal keberangkatan dengan mudah.",
+    points: ["Pengaturan kapasitas", "Detail fasilitas akomodasi", "Harga & keberangkatan"],
+  },
+  {
+    title: "Booking & Keuangan",
+    description:
+      "Pantau paket terbooking, status pembayaran, dan seat assignment dari satu dashboard.",
+    points: ["Status booking real-time", "Pembayaran & deposit", "Nomor kursi & catatan"],
+  },
+  {
+    title: "Tim Operasional",
+    description:
+      "Kelompokkan pegawai (tour leader, guide, admin, marketing, dll) sesuai tanggung jawab.",
+    points: ["Distribusi role", "Kontak & catatan", "Penugasan trip"],
+  },
+];
+
+const packageOffers = [
+  {
+    title: "Madani Comfort 12 Hari",
+    duration: "12 Hari / 9 Malam",
+    price: "Rp 45.000.000",
+    description:
+      "Madinah, Makkah, dan Ziarah Madinah plus program manasik digital bersama guide berpengalaman.",
+  },
+  {
+    title: "Syahru Ramadhan Exclusive",
+    duration: "11 Hari / 8 Malam",
+    price: "Rp 42.500.000",
+    description:
+      "Khusus keberangkatan Ramadhan dengan hotel bintang 5, transportasi premium, dan seminar amal.",
+  },
+  {
+    title: "Promo Backpacker Umrah",
+    duration: "9 Hari / 6 Malam",
+    price: "Rp 28.900.000",
+    description:
+      "Pilihan ekonomis lengkap dengan akomodasi bintang 3, makanan halal siap saji, dan group guide.",
+  },
+];
+
 const LandingPage = () => {
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-blue-50 to-white">
@@ -12,15 +63,90 @@ const LandingPage = () => {
       <main className="flex-1">
         <Hero />
         <Features />
+        <section id="cta" className="py-12 px-4">
+          <div className="max-w-6xl mx-auto grid gap-6">
+            <div className="rounded-3xl bg-white shadow-2xl p-8">
+              <h3 className="text-3xl font-semibold text-gray-900">
+                Sistem Informasi Jamaah Umrah
+              </h3>
+              <p className="text-gray-600 mt-3">
+                Panel admin ini menggabungkan user management dengan domain khusus
+                umrah: jamaah, paket, pegawai operasional, dan booking. Anda dapat
+                melihat status jamaah, menugaskan staff seperti tour leader hingga
+                marketing, serta memantau paket dan booking dalam satu alur.
+              </p>
+            </div>
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {systemHighlights.map((item) => (
+                <div
+                  key={item.title}
+                  className="h-full rounded-3xl bg-white p-6 shadow-lg flex flex-col"
+                >
+                  <h4 className="text-xl font-semibold text-gray-900">
+                    {item.title}
+                  </h4>
+                  <p className="text-gray-600 mt-2 flex-1">{item.description}</p>
+                  <ul className="mt-4 space-y-1 text-sm text-blue-600">
+                    {item.points.map((point) => (
+                      <li key={point} className="flex items-center gap-2">
+                        <span className="h-2 w-2 rounded-full bg-blue-600 inline-block" />
+                        {point}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+        <section className="py-12 px-4 bg-gradient-to-b from-white to-blue-50">
+          <div className="max-w-6xl mx-auto space-y-6">
+            <div>
+              <p className="text-sm uppercase tracking-wide text-blue-600 font-semibold">
+                Paket Umrah Unggulan
+              </p>
+              <h3 className="text-3xl font-semibold text-gray-900">
+                Tawarkan pengalaman ibadah yang terencana
+              </h3>
+              <p className="text-gray-600 mt-2 max-w-3xl">
+                Setiap paket bisa dipublish langsung ke landing page sehingga jamaah
+                maupun marketing melihat detail durasi, fasilitas, dan harga
+                terbaru. Data paket juga otomatis terkait dengan booking jamaah.
+              </p>
+            </div>
+            <div className="grid gap-6 md:grid-cols-3">
+              {packageOffers.map((pkg) => (
+                <div
+                  key={pkg.title}
+                  className="rounded-3xl bg-white p-6 shadow-xl flex flex-col"
+                >
+                  <div className="text-sm text-blue-500 font-semibold uppercase tracking-wide">
+                    Paket Umrah
+                  </div>
+                  <h4 className="text-2xl font-semibold text-gray-900 mt-2">
+                    {pkg.title}
+                  </h4>
+                  <p className="text-sm text-gray-500 mt-1">{pkg.duration}</p>
+                  <p className="text-3xl font-bold text-blue-600 mt-4">{pkg.price}</p>
+                  <p className="mt-4 text-gray-600 flex-1">{pkg.description}</p>
+                  <button className="mt-6 rounded-full border border-blue-600 text-blue-600 font-semibold px-4 py-2 hover:bg-blue-50 transition">
+                    Pelajari Paket
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
         <section className="py-12 px-4">
           <div className="max-w-4xl mx-auto bg-white rounded-3xl shadow-2xl p-8 text-center">
             <h3 className="text-2xl font-semibold text-gray-900">
-              Kelola pengguna dan izin dengan mudah
+              Masuk untuk mengatur jamaah dan paket umrah Anda
             </h3>
             <p className="text-gray-600 mt-3">
-              Mulai dari landing page hingga panel admin, semua dalam satu alur
-              yang konsisten. Masuk untuk melihat data real-time dan menambah
-              tim.
+              Mulai dari landing page hingga detail booking, panel admin yang
+              sudah Anda kenal sekarang dapat skala untuk seluruh operasional
+              umrah; termasuk manajemen pegawai seperti tour leader, guide, admin,
+              marketing, dan staff lainnya.
             </p>
             <div className="mt-6 flex flex-wrap justify-center gap-4">
               <Link

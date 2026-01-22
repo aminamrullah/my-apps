@@ -1,7 +1,14 @@
 import React from "react";
-import { BrowserRouter, Routes, Route, Navigate, Outlet } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+  Outlet,
+} from "react-router-dom";
 import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
+import NavbarDashboard from "./components/Navbar-dashboard";
 import UserList from "./pages/UserList";
 import AddUser from "./pages/AddUser";
 import EditUser from "./pages/EditUser";
@@ -9,12 +16,16 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import Dashboard from "./components/Dashboard";
 import LandingPage from "./pages/LandingPage";
+import JamaahList from "./pages/JamaahList";
+import PackageList from "./pages/PackageList";
+import EmployeeList from "./pages/EmployeeList";
+import BookingList from "./pages/BookingList";
 
 const SidebarLayout = () => (
   <div className="flex min-h-screen bg-gray-100">
     <Sidebar />
     <div className="flex-1 ml-64">
-      <Navbar />
+      <NavbarDashboard />
       <main className="p-4 mt-4">
         <Outlet />
       </main>
@@ -42,6 +53,10 @@ function App() {
           <Route path="/users" element={<UserList />} />
           <Route path="/users/add" element={<AddUser />} />
           <Route path="/users/edit/:id" element={<EditUser />} />
+          <Route path="/jamaahs" element={<JamaahList />} />
+          <Route path="/packages" element={<PackageList />} />
+          <Route path="/employees" element={<EmployeeList />} />
+          <Route path="/bookings" element={<BookingList />} />
         </Route>
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

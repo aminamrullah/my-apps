@@ -24,6 +24,38 @@ const Sidebar = () => {
             Manajemen User
           </Link>
         </li>
+        <li>
+          <Link
+            to="/jamaahs"
+            className="block p-3 rounded hover:bg-gray-700 transition"
+          >
+            Data Jamaah
+          </Link>
+        </li>
+        <li>
+          <Link
+            to="/packages"
+            className="block p-3 rounded hover:bg-gray-700 transition"
+          >
+            Paket Umrah
+          </Link>
+        </li>
+        <li>
+          <Link
+            to="/employees"
+            className="block p-3 rounded hover:bg-gray-700 transition"
+          >
+            Pegawai Operasional
+          </Link>
+        </li>
+        <li>
+          <Link
+            to="/bookings"
+            className="block p-3 rounded hover:bg-gray-700 transition"
+          >
+            Paket Terbooking
+          </Link>
+        </li>
         {/* <li>
           <Link
             to="/users/add"
