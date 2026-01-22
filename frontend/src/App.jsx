@@ -53,7 +53,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-const API = "http://localhost:5000";
+const API = "https://my-apps-c9hu.vercel.app/";
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem("token"));
