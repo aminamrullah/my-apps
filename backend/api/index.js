@@ -11,7 +11,7 @@ const app = express();
 // app.use(cors());
 app.use(
   cors({
-    origin: ["https://my-apps-c9hu.vercel.app/"], // Ganti dengan URL frontend Anda
+    origin: ["https://my-apps-a8ro.vercel.app/"], // Ganti dengan URL frontend Anda
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   }),
