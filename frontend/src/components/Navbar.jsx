@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 const Navbar = () => {
   return (
     <nav className="bg-white shadow-md fixed w-full top-0 z-50">
