@@ -284,6 +284,11 @@ app.get("/packages/:id", authenticate, async (req, res) => {
   res.json({ data: pkg });
 });
 
+app.get("/public/packages", async (req, res) => {
+  const packageList = await db.select().from(packages);
+  res.json({ data: packageList });
+});
+
 app.put("/packages/:id", authenticate, async (req, res) => {
   const packageId = parseIdParam(req.params.id);
   if (!packageId) {
@@ -306,7 +311,9 @@ app.put("/packages/:id", authenticate, async (req, res) => {
   if (req.body.capacity !== undefined)
     payload.capacity = toNumber(req.body.capacity, pkg.capacity);
   if (!Object.keys(payload).length) {
-    return res.status(400).json({ message: "Tidak ada perubahan yang disimpan" });
+    return res
+      .status(400)
+      .json({ message: "Tidak ada perubahan yang disimpan" });
   }
   await db.update(packages).set(payload).where(eq(packages.id, packageId));
   const updated = await ensureRecordExists(packages, packageId);
@@ -378,7 +385,9 @@ app.put("/employees/:id", authenticate, async (req, res) => {
     payload.phone = req.body.phone?.trim() || null;
   if (req.body.note !== undefined) payload.note = req.body.note?.trim() || null;
   if (!Object.keys(payload).length) {
-    return res.status(400).json({ message: "Tidak ada perubahan yang disimpan" });
+    return res
+      .status(400)
+      .json({ message: "Tidak ada perubahan yang disimpan" });
   }
   await db.update(employees).set(payload).where(eq(employees.id, employeeId));
   const updated = await ensureRecordExists(employees, employeeId);
@@ -474,8 +483,10 @@ app.put("/jamaahs/:id", authenticate, async (req, res) => {
     payload.passportNumber = req.body.passportNumber?.trim() || null;
   if (req.body.nationality?.trim())
     payload.nationality = req.body.nationality.trim();
-  if (req.body.email !== undefined) payload.email = req.body.email?.trim() || null;
-  if (req.body.phone !== undefined) payload.phone = req.body.phone?.trim() || null;
+  if (req.body.email !== undefined)
+    payload.email = req.body.email?.trim() || null;
+  if (req.body.phone !== undefined)
+    payload.phone = req.body.phone?.trim() || null;
   if (req.body.packageId !== undefined) {
     if (req.body.packageId === null) {
       payload.packageId = null;
@@ -495,7 +506,9 @@ app.put("/jamaahs/:id", authenticate, async (req, res) => {
   if (req.body.notes !== undefined)
     payload.notes = req.body.notes?.trim() || null;
   if (!Object.keys(payload).length) {
-    return res.status(400).json({ message: "Tidak ada perubahan yang disimpan" });
+    return res
+      .status(400)
+      .json({ message: "Tidak ada perubahan yang disimpan" });
   }
   await db.update(jamaahs).set(payload).where(eq(jamaahs.id, jamaahId));
   const updated = await ensureRecordExists(jamaahs, jamaahId);
@@ -517,8 +530,15 @@ app.delete("/jamaahs/:id", authenticate, async (req, res) => {
 
 // --- BOOKINGS ---
 app.post("/bookings", authenticate, async (req, res) => {
-  const { jamaahId, packageId, bookingDate, status, paymentStatus, notes, seatNumber } =
-    req.body;
+  const {
+    jamaahId,
+    packageId,
+    bookingDate,
+    status,
+    paymentStatus,
+    notes,
+    seatNumber,
+  } = req.body;
   const parsedJamaah = parseIdParam(jamaahId);
   const parsedPackage = parseIdParam(packageId);
   if (!parsedJamaah || !parsedPackage) {
@@ -608,11 +628,14 @@ app.put("/bookings/:id", authenticate, async (req, res) => {
   if (req.body.status?.trim()) payload.status = req.body.status.trim();
   if (req.body.paymentStatus?.trim())
     payload.paymentStatus = req.body.paymentStatus.trim();
-  if (req.body.notes !== undefined) payload.notes = req.body.notes?.trim() || null;
+  if (req.body.notes !== undefined)
+    payload.notes = req.body.notes?.trim() || null;
   if (req.body.seatNumber !== undefined)
     payload.seatNumber = req.body.seatNumber?.trim() || null;
   if (!Object.keys(payload).length) {
-    return res.status(400).json({ message: "Tidak ada perubahan yang disimpan" });
+    return res
+      .status(400)
+      .json({ message: "Tidak ada perubahan yang disimpan" });
   }
   await db.update(bookings).set(payload).where(eq(bookings.id, bookingId));
   const updated = await ensureRecordExists(bookings, bookingId);

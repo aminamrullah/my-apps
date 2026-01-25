@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Hero from "../components/Hero";
 import Features from "../components/Features";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+import axios from "axios";
+import { API_BASE } from "../lib/api";
 
 const systemHighlights = [
   {
@@ -40,31 +42,37 @@ const systemHighlights = [
   },
 ];
 
-const packageOffers = [
-  {
-    title: "Madani Comfort 12 Hari",
-    duration: "12 Hari / 9 Malam",
-    price: "Rp 45.000.000",
-    description:
-      "Madinah, Makkah, dan Ziarah Madinah plus program manasik digital bersama guide berpengalaman.",
-  },
-  {
-    title: "Syahru Ramadhan Exclusive",
-    duration: "11 Hari / 8 Malam",
-    price: "Rp 42.500.000",
-    description:
-      "Khusus keberangkatan Ramadhan dengan hotel bintang 5, transportasi premium, dan seminar amal.",
-  },
-  {
-    title: "Promo Backpacker Umrah",
-    duration: "9 Hari / 6 Malam",
-    price: "Rp 28.900.000",
-    description:
-      "Pilihan ekonomis lengkap dengan akomodasi bintang 3, makanan halal siap saji, dan group guide.",
-  },
-];
-
 const LandingPage = () => {
+  const [packages, setPackages] = useState([]);
+  const [loadingPackages, setLoadingPackages] = useState(true);
+  const [packageError, setPackageError] = useState("");
+
+  useEffect(() => {
+    let isActive = true;
+
+    const fetchPackages = async () => {
+      try {
+        setLoadingPackages(true);
+        const response = await axios.get(`${API_BASE}/public/packages`);
+        if (!isActive) return;
+        setPackages(response.data?.data || []);
+        setPackageError("");
+      } catch (error) {
+        if (isActive) {
+          setPackageError("Tidak dapat memuat paket terbaru dari database.");
+        }
+      } finally {
+        if (isActive) {
+          setLoadingPackages(false);
+        }
+      }
+    };
+
+    fetchPackages();
+    return () => {
+      isActive = false;
+    };
+  }, []);
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-blue-50 to-white">
       <Navbar />
@@ -124,29 +132,60 @@ const LandingPage = () => {
                 harga terbaru. Data paket juga otomatis terkait dengan booking
                 jamaah.
               </p>
+              {packageError && (
+                <p className="text-sm text-red-600 mt-2">{packageError}</p>
+              )}
             </div>
             <div className="grid gap-6 md:grid-cols-3">
-              {packageOffers.map((pkg) => (
-                <div
-                  key={pkg.title}
-                  className="rounded-3xl bg-white p-6 shadow-xl flex flex-col"
-                >
-                  <div className="text-sm text-blue-500 font-semibold uppercase tracking-wide">
-                    Paket Umrah
-                  </div>
-                  <h4 className="text-2xl font-semibold text-gray-900 mt-2">
-                    {pkg.title}
-                  </h4>
-                  <p className="text-sm text-gray-500 mt-1">{pkg.duration}</p>
-                  <p className="text-3xl font-bold text-blue-600 mt-4">
-                    {pkg.price}
-                  </p>
-                  <p className="mt-4 text-gray-600 flex-1">{pkg.description}</p>
-                  <button className="mt-6 rounded-full border border-blue-600 text-blue-600 font-semibold px-4 py-2 hover:bg-blue-50 transition">
-                    Pelajari Paket
-                  </button>
+              {loadingPackages ? (
+                <div className="md:col-span-3 rounded-3xl bg-white p-6 shadow-xl text-center text-gray-500">
+                  Memuat paket unggulan...
                 </div>
-              ))}
+              ) : packages.length ? (
+                packages.map((pkg) => {
+                  const durationText =
+                    pkg.duration ||
+                    (pkg.durationDays
+                      ? `${pkg.durationDays} Hari`
+                      : "Durasi fleksibel");
+                  const priceText =
+                    typeof pkg.price === "number"
+                      ? `Rp ${pkg.price.toLocaleString("id-ID")}`
+                      : pkg.price || "-";
+                  return (
+                    <div
+                      key={pkg.id ?? pkg.title}
+                      className="rounded-3xl bg-white p-6 shadow-xl flex flex-col"
+                    >
+                      <div className="text-sm text-blue-500 font-semibold uppercase tracking-wide">
+                        Paket Umrah
+                      </div>
+                      <h4 className="text-2xl font-semibold text-gray-900 mt-2">
+                        {pkg.title}
+                      </h4>
+                      <p className="text-sm text-gray-500 mt-1">{durationText}</p>
+                      <p className="text-3xl font-bold text-blue-600 mt-4">
+                        {priceText}
+                      </p>
+                      {pkg.departureDate && (
+                        <p className="text-xs text-gray-400 mt-1">
+                          Keberangkatan {pkg.departureDate}
+                        </p>
+                      )}
+                      <p className="mt-4 text-gray-600 flex-1">
+                        {pkg.description}
+                      </p>
+                      <button className="mt-6 rounded-full border border-blue-600 text-blue-600 font-semibold px-4 py-2 hover:bg-blue-50 transition">
+                        Pelajari Paket
+                      </button>
+                    </div>
+                  );
+                })
+              ) : (
+                <div className="md:col-span-3 rounded-3xl bg-white p-6 shadow-xl text-center text-gray-600">
+                  Belum ada paket umrah yang dipublikasikan.
+                </div>
+              )}
             </div>
           </div>
         </section>
