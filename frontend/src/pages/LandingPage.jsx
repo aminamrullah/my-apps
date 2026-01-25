@@ -127,10 +127,7 @@ const LandingPage = () => {
                 Tawarkan pengalaman ibadah yang terencana
               </h3>
               <p className="text-gray-600 mt-2 max-w-3xl">
-                Setiap paket bisa dipublish langsung ke landing page sehingga
-                jamaah maupun marketing melihat detail durasi, fasilitas, dan
-                harga terbaru. Data paket juga otomatis terkait dengan booking
-                jamaah.
+                jelajahi paket umrah unggulan kami
               </p>
               {packageError && (
                 <p className="text-sm text-red-600 mt-2">{packageError}</p>
@@ -163,7 +160,9 @@ const LandingPage = () => {
                       <h4 className="text-2xl font-semibold text-gray-900 mt-2">
                         {pkg.title}
                       </h4>
-                      <p className="text-sm text-gray-500 mt-1">{durationText}</p>
+                      <p className="text-sm text-gray-500 mt-1">
+                        {durationText}
+                      </p>
                       <p className="text-3xl font-bold text-blue-600 mt-4">
                         {priceText}
                       </p>
@@ -219,14 +218,18 @@ const LandingPage = () => {
         <section id="contact" className="py-12 px-4 bg-white">
           <div className="max-w-5xl mx-auto grid gap-6 md:grid-cols-3">
             <div className="rounded-3xl bg-blue-50 p-6 shadow-lg">
-              <h4 className="text-lg font-semibold text-blue-600">Hubungi Kami</h4>
+              <h4 className="text-lg font-semibold text-blue-600">
+                Hubungi Kami
+              </h4>
               <p className="text-gray-600 mt-2 text-sm">
-                Konsultasi kebutuhan sistem umrah, request demo, atau dukungan teknis bisa
-                langsung menghubungi tim operasional.
+                Konsultasi kebutuhan sistem umrah, request demo, atau dukungan
+                teknis bisa langsung menghubungi tim operasional.
               </p>
             </div>
             <div className="rounded-3xl bg-white border border-blue-50 p-6 shadow-lg">
-              <p className="text-sm font-semibold text-gray-500">Email Support</p>
+              <p className="text-sm font-semibold text-gray-500">
+                Email Support
+              </p>
               <p className="text-lg font-semibold text-gray-800 mt-1">
                 support@umrahinfo.id
               </p>
@@ -236,8 +239,12 @@ const LandingPage = () => {
             </div>
             <div className="rounded-3xl bg-white border border-blue-50 p-6 shadow-lg">
               <p className="text-sm font-semibold text-gray-500">Telepon</p>
-              <p className="text-lg font-semibold text-gray-800 mt-1">+62 812 3456 7890</p>
-              <p className="text-sm text-gray-500 mt-2">Tersedia WA dan hotline operasional.</p>
+              <p className="text-lg font-semibold text-gray-800 mt-1">
+                +62 812 3456 7890
+              </p>
+              <p className="text-sm text-gray-500 mt-2">
+                Tersedia WA dan hotline operasional.
+              </p>
             </div>
           </div>
         </section>

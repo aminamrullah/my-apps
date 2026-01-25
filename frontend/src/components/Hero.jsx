@@ -38,15 +38,16 @@ const Hero = () => {
             Kenalan Dulu
           </a>
         </div>
-        {/* Image Placeholder */}{" "}
+        {/* Image Preview */}
         <div className="mt-16">
-          {" "}
-          {/* Kita gunakan div sebagai placeholder gambar dashboard */}{" "}
-          <div className="mx-auto bg-gray-200 rounded-xl shadow-2xl w-full max-w-4xl h-64 md:h-96 flex items-center justify-center text-gray-400">
-            {" "}
-            [Image Dashboard Placeholder]{" "}
-          </div>{" "}
-        </div>{" "}
+          <div className="mx-auto w-full max-w-4xl h-64 md:h-96 lg:h-[420px] rounded-xl shadow-2xl overflow-hidden border border-blue-50">
+            <img
+              src="/images/kabah.png"
+              alt="Kabah Makkah"
+              className="w-full h-full object-cover object-center"
+            />
+          </div>
+        </div>
       </div>{" "}
     </section>
   );
