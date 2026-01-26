@@ -34,7 +34,7 @@ const Login = () => {
     <div className="min-h-screen bg-gradient-to-br from-white-950 via-white-900 to-white-950 px-4 py-10">
       <div className="mx-auto max-w-lg space-y-6 rounded-3xl border border-white/5 bg-white/5 p-8 shadow-2xl backdrop-blur">
         <div className="space-y-2">
-          <p className="text-xs font-semibold uppercase tracking-[0.6em] text-white/60">
+          <p className="text-xs font-semibold uppercase tracking-[0.6em] text-slate/60">
             Portal Admin
           </p>
           <h1 className="text-4xl font-bold text-slate">Login</h1>
@@ -75,9 +75,9 @@ const Login = () => {
             Masuk
           </button>
         </form>
-        <p className="text-center text-xs uppercase tracking-[0.3em] text-white/70">
+        <p className="text-center text-xs uppercase tracking-[0.3em] text-slate/70">
           Belum punya akun?{" "}
-          <Link to="/register" className="text-white/90 underline">
+          <Link to="/register" className="text-slate/90 underline">
             Register
           </Link>
         </p>
