@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const menuItems = [
   { to: "/dashboard", label: "Dashboard", icon: "📊" },
@@ -14,7 +14,12 @@ const Sidebar = ({ isOpen = true, onClose = () => {} }) => {
   const overlayClasses =
     "fixed inset-0 z-40 bg-black/40 transition-opacity duration-200 md:hidden";
   const navClasses =
-    "fixed inset-y-0 left-0 z-50 w-64 transform overflow-y-auto bg-gray-800 text-white transition-transform duration-200 ease-in-out md:relative md:block md:translate-x-0";
+    "fixed inset-y-0 left-0 z-50 w-64 transform overflow-y-auto bg-gray-800 text-white transition-transform duration-200 ease-in-out md:relative md:block md:translate-x-0 flex flex-col";
+  const navigate = useNavigate();
+  const logout = () => {
+    localStorage.removeItem("token");
+    navigate("/login");
+  };
 
   return (
     <>
@@ -48,7 +53,7 @@ const Sidebar = ({ isOpen = true, onClose = () => {} }) => {
             </svg>
           </button>
         </div>
-        <ul className="p-4 space-y-2">
+        <ul className="p-4 space-y-2 flex-1">
           {menuItems.map((item) => (
             <li key={item.to}>
               <Link
@@ -64,6 +69,15 @@ const Sidebar = ({ isOpen = true, onClose = () => {} }) => {
             </li>
           ))}
         </ul>
+        <div className="px-4 py-6 border-t border-gray-700">
+          <button
+            type="button"
+            onClick={logout}
+            className="w-full bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition text-sm font-semibold"
+          >
+            Logout
+          </button>
+        </div>
       </aside>
     </>
   );

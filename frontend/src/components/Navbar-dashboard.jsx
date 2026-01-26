@@ -40,12 +40,6 @@ const Navbar = ({ onMenuToggle = () => {} }) => {
           <div className="flex items-center space-x-4 text-sm text-gray-600">
             {/* Future top navigation */}
           </div>
-          <button
-            onClick={logout}
-            className="bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition text-sm"
-          >
-            Logout
-          </button>
         </div>
       </div>
     </nav>
