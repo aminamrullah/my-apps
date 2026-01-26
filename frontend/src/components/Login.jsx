@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { API_BASE } from "../lib/api";
+import { storeUserSession } from "../lib/session";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -17,6 +18,7 @@ const Login = () => {
       });
       const token = response.data.token;
       localStorage.setItem("token", token);
+      storeUserSession(response.data.user);
       navigate("/dashboard");
     } catch (error) {
       if (error.response) {

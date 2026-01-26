@@ -1,10 +1,13 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { getStoredUser, removeStoredUser } from "../lib/session";
 
 const NavbarDashboard = ({ onMenuToggle = () => {} }) => {
   const navigate = useNavigate();
+  const storedUser = getStoredUser();
   const logout = () => {
     localStorage.removeItem("token");
+    removeStoredUser();
     navigate("/login");
   };
 
@@ -41,7 +44,7 @@ const NavbarDashboard = ({ onMenuToggle = () => {} }) => {
         </div>
         <div className="flex w-full items-center justify-between gap-3 text-sm sm:w-auto">
           <div className="flex flex-1 rounded-full bg-white/20 p-2 text-xs font-medium uppercase tracking-[0.3em] text-white/90 backdrop-blur">
-            Halo, Administrator
+            Halo, {storedUser?.name ?? "Administrator"}
           </div>
           <div className="flex items-center gap-3">
             <button
