@@ -10,28 +10,62 @@ const menuItems = [
   { to: "/users", label: "Manajemen User", icon: "🧑" },
 ];
 
-const Sidebar = () => {
+const Sidebar = ({ isOpen = true, onClose = () => {} }) => {
+  const overlayClasses =
+    "fixed inset-0 z-40 bg-black/40 transition-opacity duration-200 md:hidden";
+  const navClasses =
+    "fixed inset-y-0 left-0 z-50 w-64 transform overflow-y-auto bg-gray-800 text-white transition-transform duration-200 ease-in-out md:relative md:block md:translate-x-0";
+
   return (
-    <div className="w-64 h-screen bg-gray-800 text-white fixed left-0 top-0 overflow-y-auto">
-      <div className="p-4 border-b border-gray-700">
-        <h1 className="text-2xl font-bold">Admin Panel</h1>
-      </div>
-      <ul className="p-4 space-y-2">
-        {menuItems.map((item) => (
-          <li key={item.to}>
-            <Link
-              to={item.to}
-              className="flex items-center gap-3 px-3 py-3 rounded hover:bg-gray-700 transition"
+    <>
+      <div
+        className={`${overlayClasses} ${
+          isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        }`}
+        aria-hidden={!isOpen}
+        onClick={onClose}
+      />
+      <aside
+        className={`${navClasses} ${isOpen ? "translate-x-0" : "-translate-x-full"}`}
+        aria-label="Sidebar menu"
+      >
+        <div className="flex items-center justify-between px-4 py-3 border-b border-gray-700 md:border-none">
+          <h1 className="text-2xl font-bold">Admin Panel</h1>
+          <button
+            onClick={onClose}
+            className="md:hidden text-gray-400 hover:text-white"
+            aria-label="Tutup menu"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={2}
+              stroke="currentColor"
+              className="h-6 w-6"
             >
-              <span aria-hidden="true" className="text-lg">
-                {item.icon}
-              </span>
-              <span className="text-sm font-medium">{item.label}</span>
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </div>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+        <ul className="p-4 space-y-2">
+          {menuItems.map((item) => (
+            <li key={item.to}>
+              <Link
+                to={item.to}
+                onClick={onClose}
+                className="flex items-center gap-3 px-3 py-3 rounded hover:bg-gray-700 transition"
+              >
+                <span aria-hidden="true" className="text-lg">
+                  {item.icon}
+                </span>
+                <span className="text-sm font-medium">{item.label}</span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </aside>
+    </>
   );
 };
 

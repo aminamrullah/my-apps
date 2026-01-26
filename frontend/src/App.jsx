@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   BrowserRouter,
   Routes,
@@ -29,17 +29,24 @@ import BookingList from "./pages/BookingList";
 import AddBooking from "./pages/AddBooking";
 import EditBooking from "./pages/EditBooking";
 
-const SidebarLayout = () => (
-  <div className="flex min-h-screen bg-gray-100">
-    <Sidebar />
-    <div className="flex-1 ml-64">
-      <NavbarDashboard />
-      <main className="p-4 mt-4">
-        <Outlet />
-      </main>
+const SidebarLayout = () => {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const closeSidebar = () => setSidebarOpen(false);
+  const toggleSidebar = () => setSidebarOpen((prev) => !prev);
+
+  return (
+    <div className="min-h-screen bg-gray-100">
+      <Sidebar isOpen={sidebarOpen} onClose={closeSidebar} />
+      <div className="flex flex-col min-h-screen md:pl-64">
+        <NavbarDashboard onMenuToggle={toggleSidebar} />
+        <main className="flex-1 p-4 md:p-6 mt-4 sm:mt-6">
+          <Outlet />
+        </main>
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 const AuthLayout = () => (
   <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
