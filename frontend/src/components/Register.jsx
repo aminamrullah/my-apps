@@ -40,7 +40,7 @@ const Register = () => {
   };
 
   const inputClass =
-    "w-full rounded-2xl border border-slate-700 bg-white/10 px-4 py-3 text-sm text-white placeholder:text-white/40 focus:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500/40";
+    "w-full rounded-2xl border border-slate-700 bg-white/10 px-4 py-3 text-sm text-slate placeholder:text-slate/40 focus:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500/40";
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-white-950 via-white-900 to-white-950 px-4 py-10">
