@@ -81,8 +81,9 @@ const BookingList = () => {
           Tambah Booking
         </Link>
       </div>
-      <div className="bg-white rounded-lg shadow overflow-hidden">
-        <table className="min-w-full">
+      <div className="bg-white rounded-lg shadow">
+        <div className="w-full overflow-x-auto">
+          <table className="min-w-full">
           <thead>
             <tr>
               {["ID", "Jamaah", "Paket", "Status", "Pembayaran", "Aksi"].map(
@@ -146,7 +147,8 @@ const BookingList = () => {
               </tr>
             )}
           </tbody>
-        </table>
+          </table>
+        </div>
       </div>
     </div>
   );

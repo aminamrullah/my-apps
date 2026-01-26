@@ -71,8 +71,9 @@ const JamaahList = () => {
           Tambah Jamaah
         </Link>
       </div>
-      <div className="bg-white rounded-lg shadow overflow-hidden">
-        <table className="min-w-full">
+      <div className="bg-white rounded-lg shadow">
+        <div className="w-full overflow-x-auto">
+          <table className="min-w-full">
           <thead>
             <tr>
               {["ID", "Nama", "Passport", "Paket", "Status", "Aksi"].map(
@@ -136,7 +137,8 @@ const JamaahList = () => {
               </tr>
             )}
           </tbody>
-        </table>
+          </table>
+        </div>
       </div>
     </div>
   );

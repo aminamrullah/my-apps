@@ -71,9 +71,9 @@ const UserList = () => {
           Tambah Baru{" "}
         </Link>{" "}
       </div>{" "}
-      <div className="bg-white rounded-lg shadow overflow-hidden">
-        {" "}
-        <table className="min-w-full leading-normal">
+      <div className="bg-white rounded-lg shadow">
+        <div className="w-full overflow-x-auto">
+          <table className="min-w-full leading-normal">
           {" "}
           <thead>
             {" "}
