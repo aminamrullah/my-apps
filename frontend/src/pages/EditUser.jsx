@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { API_BASE } from "../lib/api";
+import PanelLayout from "../components/PanelLayout";
 
 const EditUser = () => {
   const { id } = useParams();
@@ -83,87 +84,103 @@ const EditUser = () => {
     }
   };
 
+  const fieldClass =
+    "w-full rounded-2xl border border-slate-200 bg-white/90 px-4 py-2 text-sm text-slate-800 transition focus:border-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-100";
+
   return (
     <div className="p-6">
-      <h2 className="text-2xl font-bold text-gray-800 mb-6">Edit User</h2>
-      <div className="bg-white p-8 rounded-lg shadow-md max-w-lg">
-        <form className="space-y-4" onSubmit={submitUpdate}>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Nama
-            </label>
-            <input
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              type="text"
-              className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:border-blue-500"
-            />
+      <PanelLayout
+        title="Edit User"
+        subtitle="Perbarui detail akun dan password jika diperlukan."
+        accent="Users"
+        action={
+          <Link
+            to="/users"
+            className="rounded-full bg-white px-5 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-slate-900 shadow-lg transition hover:bg-slate-100"
+          >
+            Kembali ke daftar
+          </Link>
+        }
+      >
+        <form onSubmit={submitUpdate} className="space-y-6">
+          <div className="grid gap-4 md:grid-cols-2">
+            <div>
+              <label className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
+                Nama
+              </label>
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className={fieldClass}
+              />
+            </div>
+            <div>
+              <label className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
+                Email
+              </label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className={fieldClass}
+              />
+            </div>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Email
-            </label>
-            <input
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              type="email"
-              className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:border-blue-500"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
               Gender
             </label>
             <select
               value={gender}
               onChange={(e) => setGender(e.target.value)}
-              className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:border-blue-500"
+              className={fieldClass}
             >
               <option value="Laki-laki">Laki-laki</option>
               <option value="Perempuan">Perempuan</option>
               <option value="Lainnya">Lainnya</option>
             </select>
           </div>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <div className="grid gap-4 md:grid-cols-2">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
                 Password Baru (opsional)
               </label>
               <input
+                type="password"
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
-                type="password"
                 placeholder="Biarkan kosong jika tidak berubah"
-                className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:border-blue-500"
+                className={fieldClass}
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
                 Konfirmasi Password Baru
               </label>
               <input
+                type="password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
-                type="password"
                 placeholder="Ulangi password baru"
-                className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:border-blue-500"
+                className={fieldClass}
               />
             </div>
           </div>
           {error && (
-            <p className="text-sm text-red-600" role="alert">
+            <p className="text-sm font-semibold text-rose-600" role="alert">
               {error}
             </p>
           )}
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition"
+            className="w-full rounded-2xl bg-slate-900 px-4 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-white shadow-lg transition hover:bg-slate-800 disabled:opacity-60"
           >
             {loading ? "Menyimpan..." : "Simpan Perubahan"}
           </button>
         </form>
-      </div>
+      </PanelLayout>
     </div>
   );
 };

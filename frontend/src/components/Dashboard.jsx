@@ -2,27 +2,28 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { API_BASE } from "../lib/api";
+import PanelLayout from "./PanelLayout";
 
 const cards = [
   {
     id: "jamaahs",
     label: "Jamaah Terdaftar",
-    color: "from-blue-500 to-blue-600",
+    color: "bg-gradient-to-br from-blue-500 to-blue-600",
   },
   {
     id: "packages",
     label: "Paket Umrah",
-    color: "from-green-500 to-green-600",
+    color: "bg-gradient-to-br from-green-500 to-green-600",
   },
   {
     id: "employees",
     label: "Pegawai Operasional",
-    color: "from-purple-500 to-purple-600",
+    color: "bg-gradient-to-br from-purple-500 to-purple-600",
   },
   {
     id: "bookings",
     label: "Booking Aktif",
-    color: "from-yellow-500 to-yellow-600",
+    color: "bg-gradient-to-br from-yellow-500 to-orange-500",
   },
 ];
 
@@ -101,85 +102,70 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="container mx-auto mt-10 space-y-8">
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <div>
-          <h1 className="text-3xl font-bold text-gray-900">
-            Dashboard Sistem Umrah
-          </h1>
-          <p className="text-gray-600 mt-1">
-            Pantau jumlah jamaah, paket, pegawai, dan booking secara real-time.
-          </p>
+    <div className="space-y-8">
+      <PanelLayout
+        title="Dashboard Sistem Umrah"
+        subtitle="Pantau jamaah, paket, pegawai, dan booking dengan tampilan interaktif yang selalu up-to-date."
+        accent="Ringkasan"
+        badge="Realtime"
+      >
+        <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
+          {cards.map((card) => (
+            <div
+              key={card.id}
+              className={`rounded-2xl border border-white/30 p-5 shadow-xl backdrop-blur ${card.color}`}
+            >
+              <p className="text-xs uppercase tracking-[0.3em] text-white/80">
+                {card.label}
+              </p>
+              <p className="mt-3 text-4xl font-semibold text-white">
+                {stats[card.id] ?? 0}
+              </p>
+              <p className="mt-2 text-xs text-white/70">
+                Dibandingkan bulan lalu, data ini terus diperbarui oleh sistem.
+              </p>
+            </div>
+          ))}
         </div>
-        {/* <button
-          onClick={logout}
-          className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700 transition text-sm font-semibold"
-        >
-          Logout
-        </button> */}
-      </div>
+      </PanelLayout>
 
-      <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-        {cards.map((card) => (
-          <div
-            key={card.id}
-            className={`p-6 rounded-3xl shadow-lg text-white bg-gradient-to-br ${card.color}`}
-          >
-            <p className="text-sm uppercase tracking-wider">{card.label}</p>
-            <p className="text-4xl font-bold mt-3">{stats[card.id] ?? 0}</p>
-            <p className="text-sm mt-2 text-white/80">
-              Dibandingkan bulan lalu, data ini terus diperbarui oleh sistem.
-            </p>
-          </div>
-        ))}
-      </div>
-
-      <section className="bg-white rounded-3xl shadow p-6">
-        <div className="flex justify-between items-center mb-4">
-          <div>
-            <h2 className="text-xl font-semibold text-gray-900">
-              Booking Terbaru
-            </h2>
-            <p className="text-sm text-gray-500">
-              Data booking aktif yang baru muncul di sistem.
-            </p>
-          </div>
-          <span className="text-xs uppercase tracking-wider text-gray-500">
-            4 terakhir
-          </span>
-        </div>
-        {recentBookings.length ? (
-          <div className="space-y-4">
-            {recentBookings.map((booking) => (
+      <PanelLayout
+        title="Booking Terbaru"
+        subtitle="Ringkasan aktivitas booking terbaru dengan status pembayaran di ujung jari."
+        accent="Booking"
+      >
+        <div className="space-y-4">
+          {recentBookings.length ? (
+            recentBookings.map((booking) => (
               <div
                 key={booking.id}
-                className="flex flex-col sm:flex-row sm:items-center sm:justify-between border border-gray-100 rounded-2xl p-4"
+                className="flex flex-col gap-4 rounded-2xl border border-gray-200/60 bg-white/70 p-5 shadow-sm sm:flex-row sm:items-center sm:justify-between"
               >
                 <div>
-                  <p className="text-sm text-gray-500">
-                    Booking ID #{booking.id}
+                  <p className="text-xs uppercase tracking-[0.3em] text-slate-400">
+                    Booking #{booking.id}
                   </p>
-                  <p className="text-lg font-semibold text-gray-800">
+                  <p className="text-lg font-semibold text-slate-900">
                     Jamaah #{booking.jamaahId} - Paket #{booking.packageId}
                   </p>
                 </div>
-                <div className="flex items-center gap-3 mt-4 sm:mt-0">
-                  <span className="px-3 py-1 text-xs font-semibold rounded-full bg-blue-50 text-blue-600">
+                <div className="flex flex-wrap gap-2 text-xs font-semibold uppercase tracking-[0.2em]">
+                  <span className="rounded-full bg-blue-50 px-3 py-1 text-blue-600">
                     {booking.status}
                   </span>
-                  <span className="px-3 py-1 text-xs font-semibold rounded-full bg-green-50 text-green-700">
+                  <span className="rounded-full bg-green-50 px-3 py-1 text-green-700">
                     {booking.paymentStatus}
                   </span>
                 </div>
               </div>
-            ))}
-          </div>
-        ) : (
-          <p className="text-center text-gray-500">
-            Belum ada booking terbaru.
-          </p>
-        )}
-      </section>
+            ))
+          ) : (
+            <p className="text-center text-slate-500">
+              Belum ada booking terbaru.
+            </p>
+          )}
+        </div>
+      </PanelLayout>
     </div>
   );
 };

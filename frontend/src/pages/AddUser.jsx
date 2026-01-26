@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { API_BASE } from "../lib/api";
+import PanelLayout from "../components/PanelLayout";
 
 const AddUser = () => {
   const [name, setName] = useState("");
@@ -46,67 +47,83 @@ const AddUser = () => {
     }
   };
 
+  const inputClass =
+    "w-full rounded-2xl border border-slate-200 bg-white/90 px-4 py-2 text-sm text-slate-800 transition focus:border-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-100";
+
   return (
     <div className="p-6">
-      <h2 className="text-2xl font-bold text-gray-800 mb-6">
-        Tambah User Baru
-      </h2>
-      <div className="bg-white p-8 rounded-lg shadow-md max-w-md">
-        <form onSubmit={saveUser}>
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
-              Nama
-            </label>
-            <input
-              type="text"
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Masukkan Nama Lengkap"
-            />
+      <PanelLayout
+        title="Tambah User Baru"
+        subtitle="Buat akun admin untuk mengelola seluruh modul sistem."
+        accent="Users"
+        action={
+          <Link
+            to="/users"
+            className="rounded-full bg-white px-5 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-slate-900 shadow-lg transition hover:bg-slate-100"
+          >
+            Kembali ke daftar
+          </Link>
+        }
+      >
+        <form onSubmit={saveUser} className="space-y-6">
+          <div className="grid gap-4 md:grid-cols-2">
+            <div>
+              <label className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
+                Nama
+              </label>
+              <input
+                type="text"
+                className={inputClass}
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Masukkan nama lengkap"
+              />
+            </div>
+            <div>
+              <label className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
+                Email
+              </label>
+              <input
+                type="email"
+                className={inputClass}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="nama@domain.com"
+              />
+            </div>
           </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
-              Email
-            </label>
-            <input
-              type="email"
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Masukkan Email"
-            />
+          <div className="grid gap-4 md:grid-cols-2">
+            <div>
+              <label className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
+                Password
+              </label>
+              <input
+                type="password"
+                className={inputClass}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Masukkan password"
+              />
+            </div>
+            <div>
+              <label className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
+                Konfirmasi Password
+              </label>
+              <input
+                type="password"
+                className={inputClass}
+                value={confPassword}
+                onChange={(e) => setConfPassword(e.target.value)}
+                placeholder="Ulangi password"
+              />
+            </div>
           </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
-              Password
-            </label>
-            <input
-              type="password"
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Masukkan Password"
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
-              Konfirmasi Password
-            </label>
-            <input
-              type="password"
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              value={confPassword}
-              onChange={(e) => setConfPassword(e.target.value)}
-              placeholder="Ulangi Password"
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
+          <div>
+            <label className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
               Gender
             </label>
             <select
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className={inputClass}
               value={gender}
               onChange={(e) => setGender(e.target.value)}
             >
@@ -115,20 +132,18 @@ const AddUser = () => {
             </select>
           </div>
           {error && (
-            <p className="text-red-500 text-sm mb-4" role="alert">
+            <p className="text-sm font-semibold text-rose-600" role="alert">
               {error}
             </p>
           )}
-          <div className="flex items-center justify-between">
-            <button
-              className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              type="submit"
-            >
-              Simpan
-            </button>
-          </div>
+          <button
+            className="w-full rounded-2xl bg-slate-900 px-4 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-white shadow-lg transition hover:bg-slate-800"
+            type="submit"
+          >
+            Simpan User
+          </button>
         </form>
-      </div>
+      </PanelLayout>
     </div>
   );
 };

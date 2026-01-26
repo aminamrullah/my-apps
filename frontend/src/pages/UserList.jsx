@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { API_BASE } from "../lib/api";
+import PanelLayout from "../components/PanelLayout";
 const UserList = () => {
   const [users, setUsers] = useState([]);
   const [token, setToken] = useState("");
@@ -59,87 +60,68 @@ const UserList = () => {
   };
   return (
     <div className="p-6">
-      {" "}
-      <div className="flex justify-between items-center mb-6">
-        {" "}
-        <h2 className="text-2xl font-bold text-gray-800">Daftar User</h2>{" "}
-        <Link
-          to="/users/add"
-          className="bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition text-sm font-semibold"
-        >
-          {" "}
-          Tambah Baru{" "}
-        </Link>{" "}
-      </div>{" "}
-      <div className="bg-white rounded-lg shadow">
-        <div className="w-full overflow-x-auto">
-          <table className="min-w-full leading-normal">
-          {" "}
-          <thead>
-            {" "}
-            <tr>
-              {" "}
-              <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                {" "}
-                ID{" "}
-              </th>
-              <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                {" "}
-                Nama{" "}
-              </th>{" "}
-              <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                {" "}
-                Email{" "}
-              </th>{" "}
-              <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                {" "}
-                Aksi{" "}
-              </th>{" "}
-            </tr>{" "}
-          </thead>{" "}
-          <tbody>
-            {" "}
-            {users.map((user, index) => (
-              <tr key={user.id}>
-                {" "}
-                <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                  {" "}
-                  {index + 1}{" "}
-                </td>{" "}
-                <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                  {" "}
-                  <p className="text-gray-900 whitespace-no-wrap font-medium">
-                    {user.name}
-                  </p>{" "}
-                </td>{" "}
-                <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                  {" "}
-                  <p className="text-gray-900 whitespace-no-wrap">
-                    {user.email}
-                  </p>{" "}
-                </td>{" "}
-                <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm space-x-2">
-                  {" "}
-                  <Link
-                    to={`/users/edit/${user.id}`}
-                    className="text-yellow-600 hover:text-yellow-900"
-                  >
-                    {" "}
-                    Edit{" "}
-                  </Link>{" "}
-                  <button
-                    onClick={() => deleteUser(user.id)}
-                    className="text-red-600 hover:text-red-900 ml-4"
-                  >
-                    {" "}
-                    Hapus{" "}
-                  </button>{" "}
-                </td>{" "}
+      <PanelLayout
+        title="Manajemen User"
+        subtitle="Kelola akun administrator dan pengguna lain yang dapat mengakses sistem."
+        accent="Pengguna"
+        action={
+          <Link
+            to="/users/add"
+            className="rounded-full bg-white px-5 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-slate-900 shadow-lg transition hover:bg-slate-100"
+          >
+            Tambah Baru
+          </Link>
+        }
+      >
+        <div className="relative overflow-x-auto">
+          <table className="min-w-full divide-y divide-slate-200 text-sm">
+            <thead className="bg-slate-50 text-[0.65rem] uppercase tracking-[0.3em] text-slate-500">
+              <tr>
+                {["ID", "Nama", "Email", "Aksi"].map((title) => (
+                  <th key={title} className="px-4 py-3 text-left font-semibold">
+                    {title}
+                  </th>
+                ))}
               </tr>
-            ))}{" "}
-          </tbody>{" "}
-        </table>{" "}
-      </div>{" "}
+            </thead>
+            <tbody className="divide-y divide-slate-100 bg-white text-slate-700">
+              {users.length ? (
+                users.map((user, index) => (
+                  <tr key={user.id}>
+                    <td className="px-4 py-4 font-medium text-slate-900">
+                      {index + 1}
+                    </td>
+                    <td className="px-4 py-4">
+                      <p className="text-slate-900">{user.name}</p>
+                    </td>
+                    <td className="px-4 py-4">{user.email}</td>
+                    <td className="px-4 py-4 space-x-3 text-xs font-semibold uppercase tracking-[0.2em]">
+                      <Link
+                        to={`/users/edit/${user.id}`}
+                        className="text-amber-600 hover:text-amber-900"
+                      >
+                        Edit
+                      </Link>
+                      <button
+                        onClick={() => deleteUser(user.id)}
+                        className="text-rose-600 hover:text-rose-900"
+                      >
+                        Hapus
+                      </button>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan={4} className="px-4 py-6 text-center text-slate-500">
+                    Belum ada user
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+      </PanelLayout>
     </div>
   );
 };

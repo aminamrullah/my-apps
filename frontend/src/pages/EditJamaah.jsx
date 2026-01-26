@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { API_BASE } from "../lib/api";
+import PanelLayout from "../components/PanelLayout";
 
 const statusOptions = ["Aktif", "Proses Visa", "Selesai", "Batal"];
 
@@ -119,19 +120,31 @@ const EditJamaah = () => {
     }
   };
 
+  const inputClass =
+    "w-full rounded-2xl border border-slate-200 bg-white/90 px-4 py-2 text-sm text-slate-800 transition focus:border-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-100";
+
   if (loading) {
     return (
-      <div className="p-6 text-center text-gray-600">Memuat data jamaah...</div>
+      <div className="p-6 text-center text-slate-600">Memuat data jamaah...</div>
     );
   }
 
   return (
     <div className="p-6">
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-2xl font-bold text-gray-800">Edit Jamaah</h2>
-      </div>
-      <div className="bg-white rounded-lg shadow-lg p-8 max-w-2xl">
-        <form onSubmit={submit} className="space-y-4">
+      <PanelLayout
+        title="Edit Jamaah"
+        subtitle="Perbarui informasi jamaah beserta paket dan status keberangkatan."
+        accent="Jamaah"
+        action={
+          <Link
+            to="/jamaahs"
+            className="rounded-full bg-white px-5 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-slate-900 shadow-lg transition hover:bg-slate-100"
+          >
+            Kembali ke daftar
+          </Link>
+        }
+      >
+        <form onSubmit={submit} className="space-y-5">
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-1">
               Nama Lengkap
@@ -140,7 +153,7 @@ const EditJamaah = () => {
               value={form.fullName}
               onChange={updateField("fullName")}
               required
-              className="w-full border border-gray-300 rounded px-3 py-2 focus:ring focus:ring-blue-200"
+              className={inputClass}
             />
           </div>
           <div className="grid grid-cols-2 gap-4">
@@ -189,25 +202,25 @@ const EditJamaah = () => {
               />
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid gap-4 md:grid-cols-2">
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1">
+              <label className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
                 Nomor HP
               </label>
               <input
                 value={form.phone}
                 onChange={updateField("phone")}
-                className="w-full border border-gray-300 rounded px-3 py-2 focus:ring focus:ring-blue-200"
+                className={inputClass}
               />
             </div>
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1">
+              <label className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
                 Paket Umrah
               </label>
               <select
                 value={form.packageId}
                 onChange={updateField("packageId")}
-                className="w-full border border-gray-300 rounded px-3 py-2 focus:ring focus:ring-blue-200"
+                className={inputClass}
               >
                 <option value="">Pilih paket (opsional)</option>
                 {packages.map((pkg) => (
@@ -218,15 +231,15 @@ const EditJamaah = () => {
               </select>
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid gap-4 md:grid-cols-2">
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1">
+              <label className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
                 Status
               </label>
               <select
                 value={form.status}
                 onChange={updateField("status")}
-                className="w-full border border-gray-300 rounded px-3 py-2 focus:ring focus:ring-blue-200"
+                className={inputClass}
               >
                 {statusOptions.map((option) => (
                   <option key={option} value={option}>
@@ -238,30 +251,30 @@ const EditJamaah = () => {
             <div />
           </div>
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-1">
+            <label className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
               Catatan
             </label>
             <textarea
               value={form.notes}
               onChange={updateField("notes")}
-              className="w-full border border-gray-300 rounded px-3 py-2 focus:ring focus:ring-blue-200"
+              className={inputClass}
               rows={3}
             />
           </div>
           {error && (
-            <p className="text-sm text-red-600" role="alert">
+            <p className="text-sm font-semibold text-rose-600" role="alert">
               {error}
             </p>
           )}
           <button
             type="submit"
             disabled={saving}
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition disabled:opacity-50"
+            className="w-full rounded-2xl bg-slate-900 px-4 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-white shadow-lg transition hover:bg-slate-800 disabled:opacity-60"
           >
             {saving ? "Menyimpan..." : "Simpan Perubahan"}
           </button>
         </form>
-      </div>
+      </PanelLayout>
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const Navbar = ({ onMenuToggle = () => {} }) => {
+const NavbarDashboard = ({ onMenuToggle = () => {} }) => {
   const navigate = useNavigate();
   const logout = () => {
     localStorage.removeItem("token");
@@ -9,12 +9,12 @@ const Navbar = ({ onMenuToggle = () => {} }) => {
   };
 
   return (
-    <nav className="bg-white shadow-md w-full">
-      <div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
-        <div className="flex items-center justify-between gap-3 w-full sm:w-auto">
+    <nav className="w-full bg-gradient-to-r from-sky-600 via-cyan-500 to-blue-600 shadow-lg text-white">
+      <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-1 items-center gap-4">
           <button
             onClick={onMenuToggle}
-            className="md:hidden rounded-full border border-gray-200 p-2 text-gray-600 hover:bg-gray-100 transition"
+            className="md:hidden rounded-full bg-white/20 p-2 text-white hover:bg-white/30 transition"
             aria-label="Buka menu"
           >
             <svg
@@ -32,13 +32,25 @@ const Navbar = ({ onMenuToggle = () => {} }) => {
               />
             </svg>
           </button>
-          <div className="text-xl font-semibold text-gray-800">
-            {/* Panel Admin MyUmrah */}
+          <div>
+            <p className="text-xs uppercase tracking-[0.4em] text-white/70">
+              Admin Dashboard
+            </p>
+            <h1 className="text-xl font-semibold drop-shadow-sm">MyUmrah Panel</h1>
           </div>
         </div>
-        <div className="flex items-center justify-between gap-3 sm:gap-4 w-full sm:w-auto">
-          <div className="flex items-center space-x-4 text-sm text-gray-600">
-            {/* Future top navigation */}
+        <div className="flex w-full items-center justify-between gap-3 text-sm sm:w-auto">
+          <div className="flex flex-1 rounded-full bg-white/20 p-2 text-xs font-medium uppercase tracking-[0.3em] text-white/90 backdrop-blur">
+            Halo, Administrator
+          </div>
+          <div className="flex items-center gap-3">
+            <button
+              type="button"
+              onClick={logout}
+              className="rounded-full bg-white/20 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white hover:bg-white/40 transition"
+            >
+              Logout
+            </button>
           </div>
         </div>
       </div>
@@ -46,4 +58,4 @@ const Navbar = ({ onMenuToggle = () => {} }) => {
   );
 };
 
-export default Navbar;
+export default NavbarDashboard;

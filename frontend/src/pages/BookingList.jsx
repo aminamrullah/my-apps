@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { API_BASE } from "../lib/api";
 import { Link, useNavigate } from "react-router-dom";
+import PanelLayout from "../components/PanelLayout";
 
 const BookingList = () => {
   const [bookings, setBookings] = useState([]);
@@ -72,84 +73,88 @@ const BookingList = () => {
 
   return (
     <div className="p-6">
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-2xl font-bold text-gray-800">Paket Terbooking</h2>
-        <Link
-          to="/bookings/add"
-          className="bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition text-sm font-semibold"
-        >
-          Tambah Booking
-        </Link>
-      </div>
-      <div className="bg-white rounded-lg shadow">
-        <div className="w-full overflow-x-auto">
-          <table className="min-w-full">
-          <thead>
-            <tr>
-              {["ID", "Jamaah", "Paket", "Status", "Pembayaran", "Aksi"].map(
-                (title) => (
-                  <th
-                    key={title}
-                    className="px-5 py-3 border-b border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
-                  >
-                    {title}
-                  </th>
-                ),
-              )}
-            </tr>
-          </thead>
-          <tbody>
-            {loading ? (
+      <PanelLayout
+        title="Paket Terbooking"
+        subtitle="Rekap booking yang sudah dibuat jamaah, lengkap dengan status pembayaran."
+        accent="Booking"
+        action={
+          <Link
+            to="/bookings/add"
+            className="rounded-full bg-white px-5 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-slate-900 shadow-lg transition hover:bg-slate-100"
+          >
+            Tambah Booking
+          </Link>
+        }
+      >
+        <div className="relative overflow-x-auto">
+          <table className="min-w-full divide-y divide-slate-200 text-sm">
+            <thead className="bg-slate-50 text-[0.65rem] uppercase tracking-[0.3em] text-slate-500">
               <tr>
-                <td colSpan={6} className="text-center py-6 text-gray-500">
-                  Memuat booking...
-                </td>
+                {["ID", "Jamaah", "Paket", "Status", "Pembayaran", "Aksi"].map(
+                  (title) => (
+                    <th key={title} className="px-4 py-3 text-left font-semibold">
+                      {title}
+                    </th>
+                  ),
+                )}
               </tr>
-            ) : bookings.length ? (
-              bookings.map((booking) => (
-                <tr key={booking.id} className="text-sm">
-                  <td className="px-5 py-4 border-b border-gray-200">{booking.id}</td>
-                  <td className="px-5 py-4 border-b border-gray-200">
-                    {jamaahMap[booking.jamaahId] || `Jamaah #${booking.jamaahId}`}
-                  </td>
-                  <td className="px-5 py-4 border-b border-gray-200">
-                    {booking.packageId}
-                  </td>
-                  <td className="px-5 py-4 border-b border-gray-200">
-                    <span className="px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-600">
-                      {booking.status}
-                    </span>
-                  </td>
-                  <td className="px-5 py-4 border-b border-gray-200">
-                    {booking.paymentStatus}
-                  </td>
-                  <td className="px-5 py-4 border-b border-gray-200 space-x-3">
-                    <Link
-                      to={`/bookings/edit/${booking.id}`}
-                      className="text-blue-600 hover:text-blue-900"
-                    >
-                      Edit
-                    </Link>
-                    <button
-                      onClick={() => deleteBooking(booking.id)}
-                      className="text-red-600 hover:text-red-900"
-                    >
-                      Hapus
-                    </button>
+            </thead>
+            <tbody className="divide-y divide-slate-100 bg-white text-slate-700">
+              {loading ? (
+                <tr>
+                  <td
+                    colSpan={6}
+                    className="px-4 py-6 text-center text-slate-500"
+                  >
+                    Memuat booking...
                   </td>
                 </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan={6} className="text-center py-6 text-gray-500">
-                  Tidak ada booking
-                </td>
-              </tr>
-            )}
-          </tbody>
+              ) : bookings.length ? (
+                bookings.map((booking) => (
+                  <tr key={booking.id}>
+                    <td className="px-4 py-4 font-medium text-slate-900">
+                      {booking.id}
+                    </td>
+                    <td className="px-4 py-4">
+                      {jamaahMap[booking.jamaahId] || `Jamaah #${booking.jamaahId}`}
+                    </td>
+                    <td className="px-4 py-4">{booking.packageId}</td>
+                    <td className="px-4 py-4">
+                      <span className="rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-600">
+                        {booking.status}
+                      </span>
+                    </td>
+                    <td className="px-4 py-4">{booking.paymentStatus}</td>
+                    <td className="px-4 py-4 space-x-3 text-xs font-semibold uppercase tracking-[0.2em]">
+                      <Link
+                        to={`/bookings/edit/${booking.id}`}
+                        className="text-blue-600 hover:text-blue-900"
+                      >
+                        Edit
+                      </Link>
+                      <button
+                        onClick={() => deleteBooking(booking.id)}
+                        className="text-red-600 hover:text-red-900"
+                      >
+                        Hapus
+                      </button>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td
+                    colSpan={6}
+                    className="px-4 py-6 text-center text-slate-500"
+                  >
+                    Tidak ada booking
+                  </td>
+                </tr>
+              )}
+            </tbody>
           </table>
         </div>
-      </div>
+      </PanelLayout>
     </div>
   );
 };

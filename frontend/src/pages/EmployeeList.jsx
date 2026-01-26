@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { API_BASE } from "../lib/api";
 import { Link, useNavigate } from "react-router-dom";
+import PanelLayout from "../components/PanelLayout";
 
 const EmployeeList = () => {
   const [employees, setEmployees] = useState([]);
@@ -61,72 +62,82 @@ const EmployeeList = () => {
 
   return (
     <div className="p-6">
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-2xl font-bold text-gray-800">Pegawai Operasional</h2>
-        <Link
-          to="/employees/add"
-          className="bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition text-sm font-semibold"
-        >
-          Tambah Pegawai
-        </Link>
-      </div>
-      <div className="bg-white rounded-lg shadow">
-        <div className="w-full overflow-x-auto">
-          <table className="min-w-full">
-          <thead>
-            <tr>
-              {["ID", "Nama", "Role", "Email", "Kontak", "Aksi"].map((title) => (
-                <th
-                  key={title}
-                  className="px-5 py-3 border-b border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
-                >
-                  {title}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {loading ? (
+      <PanelLayout
+        title="Pegawai Operasional"
+        subtitle="Daftar pegawai yang bertugas di setiap lini operasional umrah."
+        accent="Pegawai"
+        action={
+          <Link
+            to="/employees/add"
+            className="rounded-full bg-white px-5 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-slate-900 shadow-lg transition hover:bg-slate-100"
+          >
+            Tambah Pegawai
+          </Link>
+        }
+      >
+        <div className="relative overflow-x-auto">
+          <table className="min-w-full divide-y divide-slate-200 text-sm">
+            <thead className="bg-slate-50 text-[0.65rem] uppercase tracking-[0.3em] text-slate-500">
               <tr>
-                <td colSpan={6} className="text-center py-6 text-gray-500">
-                  Memuat data pegawai...
-                </td>
+                {["ID", "Nama", "Role", "Email", "Kontak", "Aksi"].map(
+                  (title) => (
+                    <th key={title} className="px-4 py-3 text-left font-semibold">
+                      {title}
+                    </th>
+                  ),
+                )}
               </tr>
-            ) : employees.length ? (
-              employees.map((employee) => (
-                <tr key={employee.id} className="text-sm">
-                  <td className="px-5 py-4 border-b border-gray-200">{employee.id}</td>
-                  <td className="px-5 py-4 border-b border-gray-200">{employee.name}</td>
-                  <td className="px-5 py-4 border-b border-gray-200">{employee.role}</td>
-                  <td className="px-5 py-4 border-b border-gray-200">{employee.email}</td>
-                  <td className="px-5 py-4 border-b border-gray-200">{employee.phone || "-"}</td>
-                  <td className="px-5 py-4 border-b border-gray-200 space-x-3">
-                    <Link
-                      to={`/employees/edit/${employee.id}`}
-                      className="text-blue-600 hover:text-blue-900"
-                    >
-                      Edit
-                    </Link>
-                    <button
-                      onClick={() => deleteEmployee(employee.id)}
-                      className="text-red-600 hover:text-red-900"
-                    >
-                      Hapus
-                    </button>
+            </thead>
+            <tbody className="divide-y divide-slate-100 bg-white text-slate-700">
+              {loading ? (
+                <tr>
+                  <td
+                    colSpan={6}
+                    className="px-4 py-6 text-center text-slate-500"
+                  >
+                    Memuat data pegawai...
                   </td>
                 </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan={6} className="text-center py-6 text-gray-500">
-                  Tidak ada pegawai
-                </td>
-              </tr>
-            )}
-          </tbody>
+              ) : employees.length ? (
+                employees.map((employee) => (
+                  <tr key={employee.id}>
+                    <td className="px-4 py-4 font-medium text-slate-900">
+                      {employee.id}
+                    </td>
+                    <td className="px-4 py-4">{employee.name}</td>
+                    <td className="px-4 py-4">{employee.role}</td>
+                    <td className="px-4 py-4">{employee.email}</td>
+                    <td className="px-4 py-4">{employee.phone || "-"}</td>
+                    <td className="px-4 py-4 space-x-3 text-xs font-semibold uppercase tracking-[0.2em]">
+                      <Link
+                        to={`/employees/edit/${employee.id}`}
+                        className="text-blue-600 hover:text-blue-900"
+                      >
+                        Edit
+                      </Link>
+                      <button
+                        onClick={() => deleteEmployee(employee.id)}
+                        className="text-red-600 hover:text-red-900"
+                      >
+                        Hapus
+                      </button>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td
+                    colSpan={6}
+                    className="px-4 py-6 text-center text-slate-500"
+                  >
+                    Tidak ada pegawai
+                  </td>
+                </tr>
+              )}
+            </tbody>
           </table>
         </div>
-      </div>
+      </PanelLayout>
     </div>
   );
 };

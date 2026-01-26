@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { API_BASE } from "../lib/api";
 import { Link, useNavigate } from "react-router-dom";
+import PanelLayout from "../components/PanelLayout";
 
 const JamaahList = () => {
   const [jamaahs, setJamaahs] = useState([]);
@@ -62,84 +63,90 @@ const JamaahList = () => {
 
   return (
     <div className="p-6">
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-2xl font-bold text-gray-800">Data Jamaah</h2>
-        <Link
-          to="/jamaahs/add"
-          className="bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition text-sm font-semibold"
-        >
-          Tambah Jamaah
-        </Link>
-      </div>
-      <div className="bg-white rounded-lg shadow">
-        <div className="w-full overflow-x-auto">
-          <table className="min-w-full">
-          <thead>
-            <tr>
-              {["ID", "Nama", "Passport", "Paket", "Status", "Aksi"].map(
-                (title) => (
-                  <th
-                    key={title}
-                    className="px-5 py-3 border-b border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
-                  >
-                    {title}
-                  </th>
-                ),
-              )}
-            </tr>
-          </thead>
-          <tbody>
-            {loading ? (
+      <PanelLayout
+        title="Data Jamaah"
+        subtitle="Kelola profil jamaah, paket yang diambil, serta status keberangkatan."
+        accent="Jamaah"
+        action={
+          <Link
+            to="/jamaahs/add"
+            className="rounded-full bg-white px-5 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-slate-900 shadow-lg transition hover:bg-slate-100"
+          >
+            Tambah Jamaah
+          </Link>
+        }
+      >
+        <div className="relative overflow-x-auto">
+          <table className="min-w-full divide-y divide-slate-200 text-sm">
+            <thead className="bg-slate-50 text-[0.65rem] uppercase tracking-[0.3em] text-slate-500">
               <tr>
-                <td colSpan={6} className="text-center py-6 text-gray-500">
-                  Memuat data jamaah...
-                </td>
+                {["ID", "Nama", "Passport", "Paket", "Status", "Aksi"].map(
+                  (title) => (
+                    <th key={title} className="px-4 py-3 text-left font-semibold">
+                      {title}
+                    </th>
+                  ),
+                )}
               </tr>
-            ) : jamaahs.length ? (
-              jamaahs.map((jamaah) => (
-                <tr key={jamaah.id} className="text-sm">
-                  <td className="px-5 py-4 border-b border-gray-200">{jamaah.id}</td>
-                  <td className="px-5 py-4 border-b border-gray-200">
-                    {jamaah.fullName}
-                  </td>
-                  <td className="px-5 py-4 border-b border-gray-200">
-                    {jamaah.passportNumber || "-"}
-                  </td>
-                  <td className="px-5 py-4 border-b border-gray-200">
-                    {jamaah.packageId || "-"}
-                  </td>
-                  <td className="px-5 py-4 border-b border-gray-200">
-                    <span className="px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-600">
-                      {jamaah.status}
-                    </span>
-                  </td>
-                  <td className="px-5 py-4 border-b border-gray-200 text-sm space-x-3">
-                    <Link
-                      to={`/jamaahs/edit/${jamaah.id}`}
-                      className="text-blue-600 hover:text-blue-900"
-                    >
-                      Edit
-                    </Link>
-                    <button
-                      onClick={() => deleteJamaah(jamaah.id)}
-                      className="text-red-600 hover:text-red-900"
-                    >
-                      Hapus
-                    </button>
+            </thead>
+            <tbody className="divide-y divide-slate-100 bg-white text-slate-700">
+              {loading ? (
+                <tr>
+                  <td
+                    colSpan={6}
+                    className="px-4 py-6 text-center text-slate-500"
+                  >
+                    Memuat data jamaah...
                   </td>
                 </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan={6} className="text-center py-6 text-gray-500">
-                  Tidak ada jamaah
-                </td>
-              </tr>
-            )}
-          </tbody>
+              ) : jamaahs.length ? (
+                jamaahs.map((jamaah) => (
+                  <tr key={jamaah.id}>
+                    <td className="px-4 py-4 font-medium text-slate-900">
+                      {jamaah.id}
+                    </td>
+                    <td className="px-4 py-4">{jamaah.fullName}</td>
+                    <td className="px-4 py-4">
+                      {jamaah.passportNumber || "-"}
+                    </td>
+                    <td className="px-4 py-4">
+                      {jamaah.packageId || "-"}
+                    </td>
+                    <td className="px-4 py-4">
+                      <span className="rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-600">
+                        {jamaah.status}
+                      </span>
+                    </td>
+                    <td className="px-4 py-4 space-x-3 text-xs font-semibold uppercase tracking-[0.2em]">
+                      <Link
+                        to={`/jamaahs/edit/${jamaah.id}`}
+                        className="text-blue-600 hover:text-blue-900"
+                      >
+                        Edit
+                      </Link>
+                      <button
+                        onClick={() => deleteJamaah(jamaah.id)}
+                        className="text-red-600 hover:text-red-900"
+                      >
+                        Hapus
+                      </button>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td
+                    colSpan={6}
+                    className="px-4 py-6 text-center text-slate-500"
+                  >
+                    Tidak ada jamaah
+                  </td>
+                </tr>
+              )}
+            </tbody>
           </table>
         </div>
-      </div>
+      </PanelLayout>
     </div>
   );
 };
