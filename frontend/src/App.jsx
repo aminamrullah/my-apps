@@ -37,12 +37,14 @@ const SidebarLayout = () => {
 
   return (
     <div className="min-h-screen bg-gray-100">
-      <Sidebar isOpen={sidebarOpen} onClose={closeSidebar} />
-      <div className="flex flex-col min-h-screen md:pl-64">
-        <NavbarDashboard onMenuToggle={toggleSidebar} />
-        <main className="flex-1 p-4 md:p-6 mt-4 sm:mt-6">
-          <Outlet />
-        </main>
+      <div className="md:flex min-h-screen">
+        <Sidebar isOpen={sidebarOpen} onClose={closeSidebar} />
+        <div className="flex flex-col flex-1 min-h-screen">
+          <NavbarDashboard onMenuToggle={toggleSidebar} />
+          <main className="flex-1 p-4 md:p-6 mt-4 sm:mt-6">
+            <Outlet />
+          </main>
+        </div>
       </div>
     </div>
   );
