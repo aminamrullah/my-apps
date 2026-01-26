@@ -33,7 +33,7 @@ const Navbar = ({ onMenuToggle = () => {} }) => {
             </svg>
           </button>
           <div className="text-xl font-semibold text-gray-800">
-            Panel Admin MyUmrah
+            {/* Panel Admin MyUmrah */}
           </div>
         </div>
         <div className="flex items-center justify-between gap-3 sm:gap-4 w-full sm:w-auto">
