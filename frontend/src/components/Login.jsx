@@ -37,15 +37,15 @@ const Login = () => {
           <p className="text-xs font-semibold uppercase tracking-[0.6em] text-white/60">
             Portal Admin
           </p>
-          <h1 className="text-4xl font-bold text-white">Login</h1>
-          <p className="text-sm text-white/70">
+          <h1 className="text-4xl font-bold text-slate">Login</h1>
+          <p className="text-sm text-slate/70">
             Masuk untuk mengelola jamaah, paket, booking, dan pegawai.
           </p>
         </div>
         <form onSubmit={Auth} className="space-y-4">
           {msg && <p className="text-center text-sm text-rose-400">{msg}</p>}
           <div>
-            <label className="text-xs font-semibold uppercase tracking-[0.3em] text-white/70">
+            <label className="text-xs font-semibold uppercase tracking-[0.3em] text-slate/70">
               Email
             </label>
             <input
@@ -57,7 +57,7 @@ const Login = () => {
             />
           </div>
           <div>
-            <label className="text-xs font-semibold uppercase tracking-[0.3em] text-white/70">
+            <label className="text-xs font-semibold uppercase tracking-[0.3em] text-slate/70">
               Password
             </label>
             <input
