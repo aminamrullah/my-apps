@@ -37,9 +37,11 @@ const NavbarDashboard = ({ onMenuToggle = () => {} }) => {
           </button>
           <div>
             <p className="text-xs uppercase tracking-[0.4em] text-white/70">
-              Admin Dashboard
+              Moh Amin Amrullah
             </p>
-            <h1 className="text-xl font-semibold drop-shadow-sm">MyUmrah Panel</h1>
+            <h1 className="text-xl font-semibold drop-shadow-sm">
+              MyUmrah Corp
+            </h1>
           </div>
         </div>
         <div className="flex w-full items-center justify-between gap-3 text-sm sm:w-auto">

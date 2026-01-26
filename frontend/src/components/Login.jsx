@@ -31,7 +31,7 @@ const Login = () => {
     "w-full rounded-2xl border border-slate-700 bg-white/10 px-4 py-3 text-sm text-white placeholder:text-white/40 focus:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500/40";
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 px-4 py-10">
+    <div className="min-h-screen bg-gradient-to-br from-white-950 via-white-900 to-white-950 px-4 py-10">
       <div className="mx-auto max-w-lg space-y-6 rounded-3xl border border-white/5 bg-white/5 p-8 shadow-2xl backdrop-blur">
         <div className="space-y-2">
           <p className="text-xs font-semibold uppercase tracking-[0.6em] text-white/60">
@@ -52,7 +52,7 @@ const Login = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               type="email"
-              placeholder="email@domain.com"
+              placeholder="email@email.com"
               className={inputClass}
             />
           </div>
