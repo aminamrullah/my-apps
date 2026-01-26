@@ -37,98 +37,108 @@ const Register = () => {
     }
   };
 
+  const inputClass =
+    "w-full rounded-2xl border border-slate-700 bg-white/10 px-4 py-3 text-sm text-white placeholder:text-white/40 focus:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500/40";
+
   return (
-    <div className="w-full max-w-md">
-      <form
-        onSubmit={handleRegister}
-        className="bg-white shadow-lg rounded-xl px-8 py-10 space-y-5"
-      >
-        <h2 className="text-center text-3xl font-semibold text-gray-800">
-          Register
-        </h2>
-        {error && (
-          <p className="text-sm text-red-600 text-center" role="alert">
-            {error}
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 px-4 py-10">
+      <div className="mx-auto max-w-2xl space-y-6 rounded-3xl border border-white/5 bg-white/5 p-8 shadow-2xl backdrop-blur">
+        <div className="space-y-2">
+          <p className="text-xs font-semibold uppercase tracking-[0.6em] text-white/60">
+            Bergabung Sekarang
           </p>
-        )}
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Nama Lengkap
-          </label>
-          <input
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            type="text"
-            placeholder="Nama lengkap"
-            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:border-blue-500 focus:outline-none"
-          />
+          <h1 className="text-4xl font-bold text-white">Register</h1>
+          <p className="text-sm text-white/70">
+            Buat akses administrator dan mulai kelola jamaah, paket, booking, dan pegawai.
+          </p>
         </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Email
-          </label>
-          <input
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            type="email"
-            placeholder="email@contoh.com"
-            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:border-blue-500 focus:outline-none"
-          />
-        </div>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Password
-            </label>
-            <input
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              type="password"
-              placeholder="Minimal 8 karakter"
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:border-blue-500 focus:outline-none"
-            />
+        <form onSubmit={handleRegister} className="space-y-5">
+          {error && (
+            <p className="text-center text-sm text-rose-400" role="alert">
+              {error}
+            </p>
+          )}
+          <div className="grid gap-4 md:grid-cols-2">
+            <div>
+              <label className="text-xs font-semibold uppercase tracking-[0.3em] text-white/70">
+                Nama Lengkap
+              </label>
+              <input
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                type="text"
+                placeholder="Nama lengkap"
+                className={inputClass}
+              />
+            </div>
+            <div>
+              <label className="text-xs font-semibold uppercase tracking-[0.3em] text-white/70">
+                Email
+              </label>
+              <input
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                type="email"
+                placeholder="email@domain.com"
+                className={inputClass}
+              />
+            </div>
+          </div>
+          <div className="grid gap-4 md:grid-cols-2">
+            <div>
+              <label className="text-xs font-semibold uppercase tracking-[0.3em] text-white/70">
+                Password
+              </label>
+              <input
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                type="password"
+                placeholder="Minimal 8 karakter"
+                className={inputClass}
+              />
+            </div>
+            <div>
+              <label className="text-xs font-semibold uppercase tracking-[0.3em] text-white/70">
+                Konfirmasi Password
+              </label>
+              <input
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                type="password"
+                placeholder="Ulangi password"
+                className={inputClass}
+              />
+            </div>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Konfirmasi Password
+            <label className="text-xs font-semibold uppercase tracking-[0.3em] text-white/70">
+              Gender
             </label>
-            <input
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              type="password"
-              placeholder="Ulangi password"
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:border-blue-500 focus:outline-none"
-            />
+            <select
+              value={gender}
+              onChange={(e) => setGender(e.target.value)}
+              className={inputClass}
+            >
+              <option value="Laki-laki">Laki-laki</option>
+              <option value="Perempuan">Perempuan</option>
+              <option value="Lainnya">Lainnya</option>
+            </select>
           </div>
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Gender
-          </label>
-          <select
-            value={gender}
-            onChange={(e) => setGender(e.target.value)}
-            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:border-blue-500 focus:outline-none"
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full rounded-2xl bg-gradient-to-r from-sky-500 to-blue-600 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-white shadow-lg transition hover:opacity-90 disabled:opacity-60"
           >
-            <option value="Laki-laki">Laki-laki</option>
-            <option value="Perempuan">Perempuan</option>
-            <option value="Lainnya">Lainnya</option>
-          </select>
-        </div>
-        <button
-          type="submit"
-          disabled={loading}
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition"
-        >
-          {loading ? "Mendaftarkan..." : "Daftar Sekarang"}
-        </button>
-        <p className="text-center text-sm text-gray-500">
+            {loading ? "Mendaftarkan..." : "Daftar Sekarang"}
+          </button>
+        </form>
+        <p className="text-center text-xs uppercase tracking-[0.3em] text-white/70">
           Sudah punya akun?{" "}
-          <Link className="text-blue-600 hover:underline" to="/login">
+          <Link to="/login" className="text-white/90 underline">
             Masuk
           </Link>
         </p>
-      </form>
+      </div>
     </div>
   );
 };

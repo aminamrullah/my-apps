@@ -3,18 +3,18 @@ import { Link, useNavigate } from "react-router-dom";
 
 const menuItems = [
   { to: "/dashboard", label: "Dashboard", icon: "📊" },
-  { to: "/jamaahs", label: "Data Jamaah", icon: "🕋" },
-  { to: "/packages", label: "Paket Umrah", icon: "🗂️" },
-  { to: "/bookings", label: "Paket Terbooking", icon: "📝" },
-  { to: "/employees", label: "Pegawai Operasional", icon: "👥" },
-  { to: "/users", label: "Manajemen User", icon: "🧑" },
+  { to: "/jamaahs", label: "Data Jamaah", icon: "🧭" },
+  { to: "/packages", label: "Paket Umrah", icon: "🛫" },
+  { to: "/bookings", label: "Paket Terbooking", icon: "🎟️" },
+  { to: "/employees", label: "Pegawai Operasional", icon: "🧑‍💼" },
+  { to: "/users", label: "Manajemen User", icon: "👥" },
 ];
 
 const Sidebar = ({ isOpen = true, onClose = () => {} }) => {
   const overlayClasses =
-    "fixed inset-0 z-40 bg-black/40 transition-opacity duration-200 md:hidden";
+    "fixed inset-0 z-40 bg-slate-900/70 transition-opacity duration-200 md:hidden";
   const navClasses =
-    "fixed inset-y-0 left-0 z-50 w-64 transform overflow-y-auto bg-gray-800 text-white transition-transform duration-200 ease-in-out md:relative md:block md:translate-x-0 flex flex-col";
+    "fixed inset-y-0 left-0 z-50 w-64 transform overflow-y-auto bg-slate-950 text-white shadow-2xl transition-transform duration-200 ease-in-out md:relative md:block md:translate-x-0 flex flex-col ";
   const navigate = useNavigate();
   const logout = () => {
     localStorage.removeItem("token");
@@ -34,46 +34,49 @@ const Sidebar = ({ isOpen = true, onClose = () => {} }) => {
         className={`${navClasses} ${isOpen ? "translate-x-0" : "-translate-x-full"}`}
         aria-label="Sidebar menu"
       >
-        <div className="flex items-center justify-between px-4 py-3 border-b border-gray-700 md:border-none">
-          <h1 className="text-2xl font-bold">Admin Panel</h1>
-          <button
-            onClick={onClose}
-            className="md:hidden text-gray-400 hover:text-white"
-            aria-label="Tutup menu"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={2}
-              stroke="currentColor"
-              className="h-6 w-6"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
+        <div className="px-6 py-6">
+          <p className="text-xs font-semibold uppercase tracking-[0.5em] text-white/60">
+            MyUmrah
+          </p>
+          <h1 className="text-2xl font-black tracking-tight text-white">
+            Admin Panel
+          </h1>
+          <p className="mt-2 text-sm text-white/60">
+            Mode profesional untuk monitoring jamaah, paket, dan booking.
+          </p>
         </div>
-        <ul className="p-4 space-y-2 flex-1">
+
+        <div className="flex gap-3 px-4">
+          <div className="flex w-full items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3">
+            <span className="h-10 w-10 rounded-2xl bg-white/20 text-center text-base leading-10">
+              🤍
+            </span>
+            <div>
+              <p className="text-sm font-semibold text-white">Halo, Admin</p>
+              <p className="text-xs text-white/60">Siap mendampingi operasi setiap hari.</p>
+            </div>
+          </div>
+        </div>
+
+        <nav className="mt-6 flex-1 space-y-2 px-4">
           {menuItems.map((item) => (
-            <li key={item.to}>
-              <Link
-                to={item.to}
-                onClick={onClose}
-                className="flex items-center gap-3 px-3 py-3 rounded hover:bg-gray-700 transition"
-              >
-                <span aria-hidden="true" className="text-lg">
-                  {item.icon}
-                </span>
-                <span className="text-sm font-medium">{item.label}</span>
-              </Link>
-            </li>
+            <Link
+              key={item.to}
+              to={item.to}
+              onClick={onClose}
+              className="flex items-center gap-3 rounded-2xl border border-transparent px-4 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-white transition hover:border-white/20 hover:bg-white/10"
+            >
+              <span className="text-xl">{item.icon}</span>
+              <span className="text-xs tracking-[0.4em]">{item.label}</span>
+            </Link>
           ))}
-        </ul>
-        <div className="px-4 py-6 border-t border-gray-700">
+        </nav>
+
+        <div className="mt-auto px-4 py-6">
           <button
             type="button"
             onClick={logout}
-            className="w-full bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition text-sm font-semibold"
+            className="w-full rounded-full border border-white/30 bg-gradient-to-r from-sky-500 to-cyan-400 px-4 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-slate-950 shadow-lg transition hover:from-sky-400 hover:to-cyan-300"
           >
             Logout
           </button>
